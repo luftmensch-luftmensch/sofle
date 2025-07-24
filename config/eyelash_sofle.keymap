@@ -10,6 +10,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/outputs.h>
+#include "keys_it.h"
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
@@ -68,11 +69,11 @@
 
         layer2 {
             bindings = <
-&kp F1  &kp F2       &kp F3    &kp F4     &kp F5     &kp F6          &mmv MOVE_UP     &kp F7            &kp F8             &kp F9  &kp F10  &kp F11        &kp F12
-&trans  &none        &none     &trans     &trans     &out OUT_TOG    &mmv MOVE_DOWN   &trans            &trans             &trans  &trans   &kp UNDER      &kp PLUS
-&trans  &kp AT_SIGN  &kp HASH  &kp TILDE  &kp GRAVE  &trans          &mmv MOVE_LEFT   &kp LESS_THAN     &kp GREATER_THAN   &trans  &trans   &kp LBRC       &kp RBRC
-&trans  &trans       &trans    &trans     &trans     &trans          &mmv MOVE_RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &none   &none    &kp RIGHT_ALT  &trans
-&trans  &trans       &trans    &trans     &trans     &trans          &mkp LCLK        &trans            &trans             &trans  &trans   &trans
+&kp F1  &kp F2       &kp F3       &kp F4      &kp F5      &kp F6          &mmv MOVE_UP     &kp F7            &kp F8             &kp F9  &kp F10  &kp F11        &kp F12
+&trans  &none        &none        &trans      &trans      &out OUT_TOG    &mmv MOVE_DOWN   &trans            &trans             &trans  &trans   &kp UNDER      &kp PLUS
+&trans  &kp IT_AT    &kp IT_HASH  &kp IT_TIL  &kp IT_BKT  &trans          &mmv MOVE_LEFT   &kp IT_LT         &kp IT_GT          &trans  &trans   &kp LBRC       &kp RBRC
+&trans  &trans       &trans       &trans      &trans      &trans          &mmv MOVE_RIGHT  &kp IT_LBKT       &kp IT_RBKT        &none   &none    &kp RIGHT_ALT  &trans
+&trans  &trans       &trans       &trans      &trans      &trans          &mkp LCLK        &trans            &trans             &trans  &trans   &trans
             >;
             display-name = "layer2";
             sensor-bindings = <&scroll_encoder>;
