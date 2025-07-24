@@ -158,14 +158,14 @@ layers:
   - _
   - +
   - {t: '$$mdi:transfer$$', type: trans}
-  - '@'
-  - '#'
-  - '~'
-  - {t: '`', s: '~'}
+  - ((RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD SEMICOLON AND COLON))))
+  - (RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD APOSTROPHE AND QUOTE)))
+  - ((RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD EQUAL AND PLUS))))
+  - ((RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD MINUS AND UNDERSCORE))))
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:menu-left$$', s: '$$mdi:mouse$$'}
-  - <
-  - '>'
+  - ((ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD NON US BACKSLASH AND PIPE)))
+  - ((LS(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD NON US BACKSLASH AND PIPE))))
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - '{'
@@ -177,8 +177,8 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
-  - {t: '[', s: '{'}
-  - {t: ']', s: '}'}
+  - ((RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD LEFT BRACKET AND LEFT BRACE))))
+  - ((RA(ZMK HID USAGE(HID USAGE KEY, HID USAGE KEY KEYBOARD RIGHT BRACKET AND RIGHT BRACE))))
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - {t: '$$mdi:minus-circle-outline$$', type: none}
   - $$mdi:apple-keyboard-option$$
