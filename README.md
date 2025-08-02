@@ -1,23 +1,7 @@
-- [Chinese](README.md)
-- [English](README_EN.md)
+# ZMK Custom Layouts
 
-# Update List
+This repository contains the ZMK user configuration for all my keyboards that use the ZMK firmware.
 
-- 2024/12/21
-  1. Added support for zmk-studio (just refresh the left hand to use).
-- 2024/10/24
-  1. Modified power supply mode to reduce power consumption.
-  2. Fixed the automatic shut-off feature for RGB power supply.
+# Layouts
 
-> If your keyboard was updated before October 24, please update to the latest firmware.
-> 
----
-# Contact Me
-
-For 3D printed model files or any issues and malfunctions with the keyboard, please contact 380465425@qq.com
-
-# Sofle Keymap
-
-
-<img src="keymap-drawer/sofle.svg" >
-
+![Current layout](./layout/eyelash_sofle.svg)

@@ -1,0 +1,308 @@
+layout: { zmk_keyboard: eyelash_sofle }
+draw_config:
+  dark_mode: true
+  n_columns: 1
+  draw_key_sides: true
+  key_w: 60.0
+  key_h: 56.0
+  split_gap: 30.0
+  combo_w: 28.0
+  combo_h: 26.0
+  key_rx: 6.0
+  key_ry: 6.0
+  inner_pad_w: 2.0
+  inner_pad_h: 2.0
+  outer_pad_w: 40.0
+  outer_pad_h: 56.0
+  line_spacing: 1.2
+  arc_radius: 6.0
+  append_colon_to_layer_header: true
+  small_pad: 2.0
+  svg_extra_style: |
+    /* For default styles, see https://github.com/caksoylar/keymap-drawer/blob/main/keymap_drawer/config.py#L85 */
+
+    svg.keymap {
+      font-family: Ubuntu Mono, Inconsolata, Consolas, Liberation Mono, Menlo, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Color accent for held keys */
+    rect.held, rect.combo.held {
+        fill: #ffc;
+    }
+
+    /* Technique borrowed and extended from https://github.com/englmaxi/zmk-config/blob/master/keymap-drawer/config.yaml */
+    .sym_sub_text.tap {
+      translate: -5px 2px;
+      font-size: 20px;
+    }
+    .sym_sub_text.shifted {
+      translate: 10px 13px;
+      font-size: 10px;
+      opacity: 1.0;
+    }
+    .combo.sym_sub_text.tap {
+      translate: -1px 1px;
+    }
+    .combo.sym_sub_text.shifted {
+      translate: 7px 5px;
+      font-size: 10px;
+      opacity: 1.0;
+    }
+
+    /* Toggle */
+    .toggle.shifted {
+      translate: -10px 12px;
+    }
+
+    .toggle.hold {
+      translate: 13px -23px;
+    }
+
+    /* Variant for tap-dances */
+    .tap_dance.tap {
+      translate: -7px 0px;
+      font-size: 12px;
+    }
+    .tap_dance.shifted {
+      translate: 7px 17px;
+      font-size: 12px;
+      opacity: 1.0;
+    }
+
+    /* Variant for symbol next to symbol */
+    .sym_by_sym.tap {
+      translate: -6px 0px;
+    }
+    .sym_by_sym.shifted {
+      translate: 10px 12px;
+      opacity: 1.0;
+    }
+
+    .combo.sym_by_sym.tap {
+      translate: -35px 0px;
+    }
+    .combo.sym_by_sym.shifted {
+      translate: 35px 20px;
+      opacity: 1.0;
+    }
+
+    .combo.sym_by_sym.hold {
+      visibility: hidden;
+    }
+
+    /* hide hold box for combo sym_by_sym */
+    .combo.sym_by_sym.hold > path[stroke="none"][fill="none"] {
+      visibility: hidden;
+    }
+
+  shrink_wide_legends: 6
+  glyph_tap_size: 18
+  glyph_hold_size: 15
+  glyph_shifted_size: 15
+  glyphs: {}
+  glyph_urls:
+    tabler: https://unpkg.com/@tabler/icons/icons/outline/{}.svg
+    tablerf: https://unpkg.com/@tabler/icons/icons/filled/{}.svg
+    mdi: https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/svg/{}.svg
+    mdil: https://raw.githubusercontent.com/Pictogrammers/MaterialDesignLight/master/svg/{}.svg
+    material: https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/{}/default/48px.svg
+  use_local_cache: true
+layers:
+  master:
+    - $$mdi:keyboard-esc$$
+    - { t: "1", s: "!" }
+    - { t: "2", s: "@" }
+    - { t: "3", s: "#" }
+    - { t: "4", s: $ }
+    - { t: "5", s: "%" }
+    - $$mdi:arrow-up-bold$$
+    - { t: "6", s: ^ }
+    - { t: "7", s: "&" }
+    - { t: "8", s: "*" }
+    - { t: "9", s: ( }
+    - { t: "0", s: ) }
+    - { t: "$$mdi:backspace$$", type: backspace }
+    - $$mdi:keyboard-tab$$
+    - Q
+    - W
+    - E
+    - R
+    - T
+    - $$mdi:arrow-down-bold$$
+    - Y
+    - U
+    - I
+    - O
+    - P
+    - { t: \, s: "|" }
+    - $$mdi:apple-keyboard-caps$$
+    - A
+    - S
+    - D
+    - F
+    - G
+    - $$mdi:arrow-left-bold$$
+    - H
+    - J
+    - K
+    - L
+    - { t: ;, s: ":" }
+    - { t: "'", s: '"' }
+    - $$mdi:apple-keyboard-shift$$
+    - Z
+    - X
+    - C
+    - V
+    - B
+    - $$mdi:arrow-right-bold$$
+    - N
+    - M
+    - { t: ",", s: < }
+    - { t: ., s: ">" }
+    - { t: /, s: "?" }
+    - $$mdi:apple-keyboard-shift$$
+    - $$mdi:volume-off$$
+    - $$mdi:apple-keyboard-control$$
+    - $$mdi:apple-keyboard-command$$
+    - $$mdi:apple-keyboard-option$$
+    - layer1
+    - $$mdi:keyboard-space$$
+    - { t: "$$mdi:keyboard-return$$", type: enter }
+    - $$mdi:keyboard-space$$
+    - { t: "$$mdi:keyboard-return$$", type: enter }
+    - layer2
+    - $$mdi:apple-keyboard-shift$$
+    - $$mdi:backspace-reverse-outline$$
+  layer1:
+    - { t: "`", s: "~" }
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - { t: "$$mdi:menu-up$$", s: "$$mdi:mouse$$" }
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "`", s: "~" }
+    - $$mdi:mouse-left-click-outline$$
+    - $$mdi:mouse-scroll-wheel$$
+    - $$mdi:mouse-right-click-outline$$
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - { t: "$$mdi:menu-down$$", s: "$$mdi:mouse$$" }
+    - PG UP
+    - END
+    - $$mdi:arrow-up-bold$$
+    - HOME
+    - { t: "-", s: _ }
+    - { t: "=", s: + }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - "~"
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - { t: "$$mdi:menu-left$$", s: "$$mdi:mouse$$" }
+    - PG DN
+    - $$mdi:arrow-left-bold$$
+    - $$mdi:arrow-down-bold$$
+    - $$mdi:arrow-right-bold$$
+    - { t: "[", s: "{" }
+    - { t: "]", s: "}" }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - RGB OFF
+    - RGB ON
+    - RGB EFF
+    - RGB EFR
+    - RGB SPI
+    - { t: "$$mdi:menu-right$$", s: "$$mdi:mouse$$" }
+    - RGB BRD
+    - RGB BRI
+    - Ins
+    - F11
+    - F12
+    - { t: "$$mdi:transfer$$", type: trans }
+    - $$mdi:volume-off$$
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { type: held }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - $$mdi:mouse-left-click-outline$$
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+  layer2:
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - F6
+    - { t: "$$mdi:menu-up$$", s: "$$mdi:mouse$$" }
+    - F7
+    - F8
+    - F9
+    - F10
+    - F11
+    - F12
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:toggle-switch$$", h: "$$mdi:bluetooth$$", s: "$$mdi:usb$$" }
+    - { t: "$$mdi:menu-down$$", s: "$$mdi:mouse$$" }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - _
+    - +
+    - { t: "$$mdi:transfer$$", type: trans }
+    - "@"
+    - "#"
+    - "~"
+    - "`"
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:menu-left$$", s: "$$mdi:mouse$$" }
+    - "<"
+    - ">"
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - "{"
+    - "}"
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:menu-right$$", s: "$$mdi:mouse$$" }
+    - "["
+    - "]"
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - { t: "$$mdi:minus-circle-outline$$", type: none }
+    - $$mdi:apple-keyboard-option$$
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - $$mdi:mouse-left-click-outline$$
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { type: held }
+    - { t: "$$mdi:transfer$$", type: trans }
+    - { t: "$$mdi:transfer$$", type: trans }

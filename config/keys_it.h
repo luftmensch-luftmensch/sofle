@@ -82,8 +82,7 @@
 
 /* # */
 #define IT_HASH                                                                \
-  (RA(ZMK_HID_USAGE(HID_USAGE_KEY,                                             \
-                    HID_USAGE_KEY_KEYBOARD_APOSTROPHE_AND_QUOTE)))
+  (RA(ZMK_HID_USAGE(HID_USAGE_KEY, HID_USAGE_KEY_KEYBOARD_APOSTROPHE_AND_QUOTE)))
 #define IT_POUND (IT_HASH)
 
 /* $ */
