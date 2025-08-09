@@ -57,6 +57,18 @@
         compatible = "zmk,keymap";
 
         master {
+        /* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
+         * │  ESC  │   1   │   2   │   3   │   4   │   5   │   ↑   │   6   │   7   │   8   │   9   │   0   │ Backspace │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │  TAB  │   Q   │   W   │   E   │   R   │   T   │   ↓   │   Y   │   U   │   I   │   O   │   P   │    \      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │ CAPS  │   A   │   S   │   D   │   F   │   G   │   ←   │   H   │   J   │   K   │   L   │   ;   │    '      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │ LSFT  │   Z   │   X   │   C   │   V   │   B   │   →   │   N   │   M   │   ,   │   .   │   /   │   RSFT    │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │ MUTE  │ LCTRL │ LGUI  │ LALT  │ MO(1) │ SPACE │ ENTER │ SPACE │ ENTER │ MO(2) │RSHIFT │DELETE │           │
+         * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
+         */
             bindings = <
 &kp ESC     &kp N1     &kp N2        &kp N3        &kp N4  &kp N5       &kp UP_ARROW     &kp N6     &kp N7     &kp N8     &kp N9           &kp N0      &kp BACKSPACE
 &kp TAB     &kp Q      &kp W         &kp E         &kp R   &kp T        &kp DOWN_ARROW   &kp Y      &kp U      &kp I      &kp O            &kp P       &kp BSLH
@@ -70,12 +82,25 @@
         };
 
         layer1 {
+
+        /* ┌───────┬────────┬────────┬────────┬────────┬────────┬───────┬────────┬────────┬────────┬────────┬────────┬────────┐
+         * │ GRAVE │   F1   │   F2   │   F3   │   F4   │   F5   │   ↑   │   F6   │   F7   │   F8   │   F9   │  F10   │ TRANS  │
+         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
+         * │ TRANS │ GRAVE  │ M_LCLK │ M_MCLK │ M_RCLK │  NONE  │   ↓   │ PG_UP  │  HOME  │   ↑    │  END   │   -    │   =    │
+         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
+         * │ TRANS │ TILDE  │ TRANS  │ TRANS  │ TRANS  │  NONE  │   ←   │ PG_DN  │   ←    │   ↓    │   →    │   [    │   ]    │
+         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
+         * │ TRANS │ RGB_OFF│ RGB_ON │RGB_EFF │RGB_EFR │RGB_SPI │   →   │RGB_BRD │RGB_BRI │ INSERT │  F11   │  F12   │ TRANS  │
+         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
+         * │ MUTE  │ TRANS  │ TRANS  │ TRANS  │ TRANS  │ TRANS  │M_LCLK │ TRANS  │ TRANS  │ TRANS  │ TRANS  │ TRANS  │        │
+         * └───────┴────────┴────────┴────────┴────────┴────────┴───────┴────────┴────────┴────────┴────────┴────────┴────────┘
+         */
             bindings = <
-&kp GRAVE   &kp F1           &kp F2          &kp F3           &kp F4           &kp F5             &mmv MOVE_UP     &kp F6           &kp F7           &kp F8      &kp F9     &kp F10           &trans
-&trans      &kp GRAVE        &mkp LCLK       &mkp MCLK        &mkp RCLK        &none              &mmv MOVE_DOWN   &kp PG_UP        &kp END          &kp UP      &kp HOME   &kp MINUS         &kp EQUAL
-&trans      &kp TILDE        &trans          &trans           &trans           &none              &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-&trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_SPI    &mmv MOVE_RIGHT  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &kp INSERT  &kp F11    &kp F12           &trans
-&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
+&kp GRAVE   &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &mmv MOVE_UP     &kp F6        &kp F7        &kp F8        &kp F9        &kp F10       &trans
+&trans      &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     &none         &mmv MOVE_DOWN   &kp PG_UP     &kp HOME      &kp UP        &kp END       &kp MINUS     &kp EQUAL
+&trans      &kp TILDE     &trans        &trans        &trans        &none         &mmv MOVE_LEFT   &kp PG_DN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp LEFT_BRACKET &kp RIGHT_BRACKET
+&trans      &rgb_ug RGB_OFF &rgb_ug RGB_ON &rgb_ug RGB_EFF &rgb_ug RGB_EFR &rgb_ug RGB_SPI &mmv MOVE_RIGHT &rgb_ug RGB_BRD &rgb_ug RGB_BRI &kp INSERT &kp F11 &kp F12 &trans
+&kp C_MUTE  &trans        &trans        &trans        &trans        &trans        &mkp LCLK        &trans        &trans        &trans        &trans        &trans
             >;
 
             display-name = "layer1";
@@ -83,6 +108,18 @@
         };
 
         layer2 {
+        /* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
+         * │  F1   │  F2   │  F3   │  F4   │  F5   │  F6   │   ↑   │  F7   │  F8   │  F9   │  F10  │  F11  │   F12     │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │ NONE  │ NONE  │TRANS  │TRANS  │OUT_TOG│   ↓   │TRANS  │TRANS  │TRANS  │TRANS  │   _   │    +      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │  @    │  #    │  ~    │  [    │TRANS  │   ←   │   <   │   >   │TRANS  │TRANS  │   [   │    ]      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │   →   │   {   │   }   │ NONE  │ NONE  │ RALT  │  TRANS    │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │M_LCLK │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │           │
+         * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
+         */
             bindings = <
 &kp F1  &kp F2       &kp F3       &kp F4      &kp F5      &kp F6          &mmv MOVE_UP     &kp F7            &kp F8             &kp F9  &kp F10  &kp F11        &kp F12
 &trans  &none        &none        &trans      &trans      &out OUT_TOG    &mmv MOVE_DOWN   &trans            &trans             &trans  &trans   &kp UNDER      &kp PLUS
@@ -95,20 +132,26 @@
         };
 
         adjust_layer {
-// ----------------------------------------------------------------------------------------------------------------------------
-// | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
-// | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
-// |        | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
-// |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
-//                    |         |         |         |         |         | |      |      |      |       |      |
-            display-name = "adjust";
+        /* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
+         * │  F1   │  F2   │  F3   │  F4   │  F5   │  F6   │   ↑   │  F7   │  F8   │  F9   │  F10  │  F11  │   F12     │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │ NONE  │ NONE  │TRANS  │TRANS  │OUT_TOG│   ↓   │TRANS  │TRANS  │TRANS  │TRANS  │   _   │    +      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │  @    │  #    │  ~    │  [    │TRANS  │   ←   │   <   │   >   │TRANS  │TRANS  │   [   │    ]      │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │   →   │   {   │   }   │ NONE  │ NONE  │ RALT  │  TRANS    │
+         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+         * │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │M_LCLK │TRANS  │TRANS  │TRANS  │TRANS  │TRANS  │           │
+         * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
+         */
             bindings = <
-&bt BT_CLR        &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4                            &none &none &none &none &none &none
-&ext_power EP_TOG &rgb_ug RGB_HUD &rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SAI &rgb_ug RGB_EFF                         &none &none &none &none &none &none
-&none             &rgb_ug RGB_BRD &rgb_ug RGB_BRI &none           &none           &none                                   &none &none &none &none &none &none
-&none             &none           &none           &none           &none           &none            &rgb_ug RGB_TOG &none  &none &none &none &none &none &none
-                                  &none           &none           &none           &none            &none           &none  &none &none &none &none
+&kp F1  &kp F2       &kp F3       &kp F4      &kp F5      &kp F6          &mmv MOVE_UP     &kp F7            &kp F8             &kp F9  &kp F10  &kp F11        &kp F12
+&trans  &none        &none        &trans      &trans      &out OUT_TOG    &mmv MOVE_DOWN   &trans            &trans             &trans  &trans   &kp UNDER      &kp PLUS
+&trans  &kp IT_AT    &kp IT_HASH  &kp IT_TIL  &kp IT_BKT  &trans          &mmv MOVE_LEFT   &kp IT_LT         &kp IT_GT          &trans  &trans   &kp LBRC       &kp RBRC
+&trans  &trans       &trans       &trans      &trans      &trans          &mmv MOVE_RIGHT  &kp IT_LBKT       &kp IT_RBKT        &none   &none    &kp RIGHT_ALT  &trans
+&trans  &trans       &trans       &trans      &trans      &trans          &mkp LCLK        &trans            &trans             &trans  &trans   &trans
             >;
+            display-name = "adjust";
         };
 
     };
