@@ -25,7 +25,7 @@
           src = ./.;
           board = "eyelash_sofle_%PART%";
           shield = "nice_view_crystal";
-          zephyrDepsHash = "sha256-IkUO29jGSRcIiV5wAlqC9Xae041yuFg1lYEI+sAX8RM=";
+          zephyrDepsHash = "sha256-j7rYe1CDeeXaY/cpINtKDWMoxMpIBecIWyEb6hx7+7o=";
         };
 
         update = zmk-nix.packages.${system}.update;

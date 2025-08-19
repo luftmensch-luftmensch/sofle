@@ -21,20 +21,14 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/outputs.h>
 #include "keys_it.h"
-
+#include "layout.h"
+#include "macros.dtsi"
 
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
 #define ADJUST 3
 
-// Taken from https://joshinator.de/posts/zmk-combo-helper/
-#define COMBO(NAME, BINDINGS, KEYPOS) \
-  combo_##NAME { \
-    timeout-ms = <50>; \
-    bindings = <BINDINGS>; \
-    key-positions = <KEYPOS>; \
-  };
 
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
@@ -74,11 +68,13 @@
     // TODO: Try to find out why this does not work
     combos {
         compatible = "zmk,combos";
-        // both left thumb keys
+        // Hold both shift keys on both sides of the keyboard
         combo_adjust {
             timeout-ms = <50>;
-            key-positions = <36 49>;
-            bindings = <&mo ADJUST>;
+            /* key-positions = <36 49>; */
+            key-positions = <LB5 RB5>;
+            bindings = <&macro_tap &kp X>;
+            /* bindings = <&to ADJUST>; */
         };
     };
 

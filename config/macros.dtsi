@@ -1,0 +1,104 @@
+// clang-format off
+/*
+ * macros.h
+ *
+ * Convenience macros simplifying ZMK's keymap configuration.
+ */
+#pragma once
+
+// Taken from https://joshinator.de/posts/zmk-combo-helper/
+#define COMBO(NAME, BINDINGS, KEYPOS)                                          \
+  combo_##NAME {                                                               \
+    timeout-ms = <50>;                                                       \
+    bindings = <BINDINGS>;                                                     \
+    key-positions = <KEYPOS>;                                                \
+  };
+
+// TODO: Try out this alternative COMBO macro
+// example: COMBO(q,      &kp Q,         LT3 LT2,     DEF,         80,  50)
+// #define COMBO(NAME, BINDINGS, KEYPOS, LAYERS, TERM, QUICKTAP, ...) \
+//     combo_##NAME { \
+//         timeout-ms = <TERM>; \
+//         bindings = <BINDINGS>; \
+//         key-positions = <KEYPOS>; \
+//         layers = <LAYERS>; \
+//         require-prior-idle-ms = <QUICKTAP>; \
+//         __VA_ARGS__ \
+//     };
+
+#define ZMK_CONDITIONAL_LAYER(name, if_layers, then_layer)                     \
+  / {                                                                          \
+    conditional_layers {                                                       \
+      compatible = "zmk,conditional-layers";                                   \
+      tri_layer_##name {                                                       \
+        if-layers = <if_layers>;                                               \
+        then-layer = <then_layer>;                                           \
+      };                                                                       \
+    };                                                                         \
+  };
+
+
+// Make the keymap section less noisy
+#define XXX &none
+#define ___ &trans
+
+
+// Handy mouse related definition
+#define U_MS_U &mmv MOVE_UP
+#define U_MS_D &mmv MOVE_DOWN
+#define U_MS_L &mmv MOVE_LEFT
+#define U_MS_R &mmv MOVE_RIGHT
+#define U_WH_U &msc SCRL_UP
+#define U_WH_D &msc SCRL_DOWN
+#define U_WH_L &msc SCRL_LEFT
+#define U_WH_R &msc SCRL_RIGHT
+
+
+/*
+ * maps to `timeout-ms`
+ * Keys must be both pressed within this time
+ *
+ * if too slow = false positives in rolls
+ * if too fast = types out both letters instead
+ */
+#define COMBO_TERM_FAST 25
+#define COMBO_TERM_SLOW 50
+
+/**
+ * maps to `require-prior-idle-ms`
+ * Must have no keys outside the combo pressed in this time before it
+ *
+ * if too slow = combo doesn't trigger when needed
+ * if too fast = combo will trigger in normal typing
+ */
+#define COMBO_IDLE_FAST 170
+#define COMBO_IDLE_SLOW 80
+
+
+// TODO: Try out
+// (_) => {}
+// ZMK_MACRO(fn_opn,
+//       bindings
+//           = <&macro_tap &kp LPAR &kp RPAR>,
+//           <&macro_tap &kp SPACE &kp EQUAL &kp GREATER_THAN>,
+//           <&macro_tap &kp SPACE &kp LBRC &kp RBRC>,
+//           //          1        2        3
+//           <&macro_tap &kp LEFT &kp LEFT &kp LEFT>,
+//           //          4        5        6
+//           <&macro_tap &kp LEFT &kp LEFT &kp LEFT>,
+//           <&macro_tap &kp LEFT>;
+// )
+
+// TODO: Try out
+// (_) =>
+// ZMK_MACRO(fn_impl,
+//       bindings
+//           = <&macro_tap &kp LPAR &kp RPAR>,
+//           <&macro_tap &kp SPACE &kp EQUAL &kp GREATER_THAN>,
+//           //          1        2        3
+//           <&macro_tap &kp LEFT &kp LEFT &kp LEFT>,
+//           <&macro_tap &kp LEFT>;
+// )
+
+// reusable arrow keys ← ↓ ↑ →
+#define ARROWS  &kp LEFT &kp DOWN &kp UP &kp RIGHT
