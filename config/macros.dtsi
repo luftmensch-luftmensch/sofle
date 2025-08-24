@@ -7,12 +7,13 @@
 #pragma once
 
 // Taken from https://joshinator.de/posts/zmk-combo-helper/
-#define COMBO(NAME, BINDINGS, KEYPOS)                                          \
-  combo_##NAME {                                                               \
+#define COMBO(NAME, BINDINGS, KEYPOS)                                        \
+  combo_##NAME {                                                             \
     timeout-ms = <50>;                                                       \
-    bindings = <BINDINGS>;                                                     \
+    bindings = <BINDINGS>;                                                   \
     key-positions = <KEYPOS>;                                                \
   };
+
 
 // TODO: Try out this alternative COMBO macro
 // example: COMBO(q,      &kp Q,         LT3 LT2,     DEF,         80,  50)
@@ -26,16 +27,21 @@
 //         __VA_ARGS__ \
 //     };
 
+#define BT_PROFILE(ID)                                          \
+  bt_profile_##ID: bt_profile_##ID {                            \
+    compatible = "zmk,behavior-macro";                          \
+    #binding-cells = <0>;                                       \
+    bindings = <&out OUT_BLE>, <&bt BT_SEL ID>;                 \
+  };
+
 #define ZMK_CONDITIONAL_LAYER(name, if_layers, then_layer)                     \
-  / {                                                                          \
     conditional_layers {                                                       \
       compatible = "zmk,conditional-layers";                                   \
       tri_layer_##name {                                                       \
         if-layers = <if_layers>;                                               \
-        then-layer = <then_layer>;                                           \
+        then-layer = <then_layer>;                                             \
       };                                                                       \
     };                                                                         \
-  };
 
 
 // Make the keymap section less noisy
@@ -53,6 +59,14 @@
 #define U_WH_L &msc SCRL_LEFT
 #define U_WH_R &msc SCRL_RIGHT
 
+// Handy rgb related definition
+#define U_RGB_OFF   &rgb_ug RGB_OFF
+#define U_RGB_ON    &rgb_ug RGB_ON
+#define U_RGB_EFF   &rgb_ug RGB_EFF
+#define U_RGB_EFR   &rgb_ug RGB_EFR
+#define U_RGB_SPI   &rgb_ug RGB_SPI
+#define U_RGB_BRD   &rgb_ug RGB_BRD
+#define U_RGB_BRI   &rgb_ug RGB_BRI
 
 /*
  * maps to `timeout-ms`

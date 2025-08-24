@@ -2,8 +2,6 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: gpeye
-      url-base: https://github.com/GPeye
     - name: luftmensch-luftmensch
       url-base: https://github.com/luftmensch-luftmensch
     - name: m165437
