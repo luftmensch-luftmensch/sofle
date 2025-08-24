@@ -76,20 +76,49 @@
             mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
         };
 
-        til_mt: til_mt {
+        /*
+            Pressing the key on its own will send a Backspace keycode
+            but pressing it while a shift or GUI modifier is held sends the Delete keycode instead
+        */
+        backdel: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp IT_AT>, <&win_hash>;
+            bindings = <&kp BACKSPACE>, <&kp DELETE>;
+            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+        };
+
+        /*
+            Pressing the key on its own will send an @ keycode
+            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
+        */
+        tilde_mt: tilde_mt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp IT_TILDE>, <&alt_tilde>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        /* til_mt: til_mt { */
-        /*     compatible = "zmk,behavior-tap-dance"; */
-        /*     #binding-cells = <0>; */
-        /*     tapping-term-ms = <200>; */
-        /*     bindings = <&kp N1>, <&kp N2>, <&kp N3>; */
-        /* }; */
+        /*
+            Pressing the key on its own will send an # keycode
+            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
+        */
+        hash_mt: hash_mt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp IT_HASH>, <&alt_hash>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
 
+        /*
+            Pressing the key on its own will send an ` keycode
+            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
+        */
+        bktk_mt: bktk_mt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp IT_BKTK>, <&alt_bktk>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     combos {
@@ -104,7 +133,6 @@
             key-positions = <LB0 RB5>;
         };
     };
-
 
     macros {
         // Turn off Windows
@@ -121,18 +149,12 @@
                 ;
         };
 
-        win_hash: win_hash {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings
-                = <&macro_press   &kp LALT>
-                , <&macro_tap     &kp KP_N3 &kp KP_N5>
-                , <&macro_release &kp LALT>
-                ;
-        };
+        // Custom macros for the Alt code tables
+        EMULATE_ALT(hash, WIN_HASH)
+        EMULATE_ALT(tilde, WIN_TILDE)
+        EMULATE_ALT(bktk, WIN_BKTK)
 
+        // Custom macros for switching between bluetooth profiles
         BT_PROFILE(0)
         BT_PROFILE(1)
         BT_PROFILE(2)
@@ -195,7 +217,7 @@
 bindings = <
   &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
   ___          &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
-  ___          &til_mt       ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
+  ___          &tilde_mt     ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
   ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
   &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK  ___          ___          ___           ___          ___
 >;
@@ -219,7 +241,7 @@ bindings = <
 bindings = <
   &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7           &kp F8           &kp F9      &kp F10      &kp F11        &kp F12
   ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___              ___              ___         ___          &kp UNDER      &kp PLUS
-  ___          &kp IT_AT    &kp IT_HASH  &kp IT_TILDE  &kp IT_BKTK  ___           U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
+  ___          &kp IT_AT    &hash_mt     &tilde_mt     &bktk_mt     ___           U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
   ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT      &kp IT_RBKT      XXX         XXX          &kp RIGHT_ALT  ___
   ___          ___          ___          ___           ___          ___           &mkp LCLK  ___              ___              ___         ___          ___
 >;

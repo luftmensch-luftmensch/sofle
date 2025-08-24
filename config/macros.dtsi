@@ -14,6 +14,18 @@
     key-positions = <KEYPOS>;                                                \
   };
 
+#define EMULATE_ALT(NAME, BINDINGS)                     \
+    alt_##NAME: alt_##NAME {                            \
+        compatible = "zmk,behavior-macro";              \
+        #binding-cells = <0>;                           \
+        wait-ms = <40>;                                 \
+        tap-ms = <40>;                                  \
+        bindings = <                                    \
+            &macro_press   &kp LALT                     \
+            &macro_tap     BINDINGS                     \
+            &macro_release &kp LALT                     \
+        >;                                              \
+    };
 
 // TODO: Try out this alternative COMBO macro
 // example: COMBO(q,      &kp Q,         LT3 LT2,     DEF,         80,  50)
@@ -26,6 +38,8 @@
 //         require-prior-idle-ms = <QUICKTAP>; \
 //         __VA_ARGS__ \
 //     };
+
+
 
 #define BT_PROFILE(ID)                                          \
   bt_profile_##ID: bt_profile_##ID {                            \
