@@ -91,6 +91,17 @@
             Pressing the key on its own will send an @ keycode
             but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
         */
+        at_mt: at_mt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp IT_AT>, <&alt_at>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        /*
+            Pressing the key on its own will send an ~ keycode
+            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
+        */
         tilde_mt: tilde_mt {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -150,6 +161,7 @@
         };
 
         // Custom macros for the Alt code tables
+        EMULATE_ALT(at, WIN_AT)
         EMULATE_ALT(hash, WIN_HASH)
         EMULATE_ALT(tilde, WIN_TILDE)
         EMULATE_ALT(bktk, WIN_BKTK)
@@ -231,7 +243,7 @@ bindings = <
          * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
          * │       │ NONE  │ NONE  │       │       │OUT_TOG│   ↓   │       │       │       │       │   _   │    +      │
          * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │       │  @    │  #    │  ~    │  [    │       │   ←   │   <   │   >   │       │       │   [   │    ]      │
+         * │       │  @    │  #    │  ~    │  `    │       │   ←   │   <   │   >   │       │       │   [   │    ]      │
          * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
          * │       │       │       │       │       │       │   →   │   {   │   }   │ NONE  │ NONE  │ RALT  │           │
          * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
@@ -241,7 +253,7 @@ bindings = <
 bindings = <
   &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7           &kp F8           &kp F9      &kp F10      &kp F11        &kp F12
   ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___              ___              ___         ___          &kp UNDER      &kp PLUS
-  ___          &kp IT_AT    &hash_mt     &tilde_mt     &bktk_mt     ___           U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
+  ___          &at_mt       &hash_mt     &tilde_mt     &bktk_mt     ___           U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
   ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT      &kp IT_RBKT      XXX         XXX          &kp RIGHT_ALT  ___
   ___          ___          ___          ___           ___          ___           &mkp LCLK  ___              ___              ___         ___          ___
 >;
@@ -266,7 +278,7 @@ bindings = <
             bindings = <
   &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7           &kp F8           &kp F9      &kp F10      &kp F11        &kp F12
   ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___              ___              ___         ___          &kp UNDER      &kp PLUS
-  ___          &kp IT_AT    &kp IT_HASH  &kp IT_TILDE  &kp IT_BKTK  ___          U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
+  ___          &at_mt       &hash_mt     &tilde_mt     &bktk_mt     ___          U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
   ___          U_RGB_OFF    U_RGB_ON     U_RGB_EFF     U_RGB_EFR   U_RGB_SPI     U_MS_R     U_RGB_BRD        U_RGB_BRI        ___         ___          ___            ___
   ___          ___          ___          ___           ___         ___           &mkp LCLK  ___              ___              ___         ___          ___
             >;

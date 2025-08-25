@@ -2,6 +2,7 @@
  * This file includes custom keycodes for the windows alt codes symbols
  */
 
+#define WIN_AT &kp KP_N6 &kp KP_N4              // Alt+64 (@)
 #define WIN_HASH &kp KP_N3 &kp KP_N5            // Alt+35 (#)
 #define WIN_TILDE &kp KP_N1 &kp KP_N2 &kp KP_N6 // Alt+126 (~)
 #define WIN_BKTK &kp KP_N9 &kp KP_N6            // Alt+96 (`)
