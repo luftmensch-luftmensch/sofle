@@ -106,24 +106,12 @@
 #define ZMK_TRI_STATE(name, ...) ZMK_BEHAVIOR(name, tri_state, __VA_ARGS__)
 #define ZMK_ROTATOR_ENCODER(name, ...) ZMK_BEHAVIOR(name, rotator_encoder, __VA_ARGS__)
 
-#define ZMK_MACRO_ALT_CODE(name, keys, ...) \
-    ZMK_BEHAVIOR(name, macro,           \
-        wait-ms  = <40>;                \
-        tap-ms   = <40>;                \
-        bindings = <                    \
-            &macro_press   &kp LALT,    \
-            &macro_tap     keys,        \
-            &macro_release &kp LALT     \
-        >;                              \
-        __VA_ARGS__                     \
-    )
-
-#define BT_PROFILE(ID)                                          \
-  bt_profile_##ID: bt_profile_##ID {                            \
-    compatible = "zmk,behavior-macro";                          \
-    #binding-cells = <0>;                                       \
-    bindings = <&out OUT_BLE>, <&bt BT_SEL ID>;                 \
-  };
+// #define BT_PROFILE(ID)                                          \
+//   bt_profile_##ID: bt_profile_##ID {                            \
+//     compatible = "zmk,behavior-macro";                          \
+//     #binding-cells = <0>;                                       \
+//     bindings = <&out OUT_BLE>, <&bt BT_SEL ID>;                 \
+//   };
 
 /* ZMK_LAYER */
 #define ZMK_LAYER(...) CONCAT(ZMK_LAYER_, VARGS(__VA_ARGS__))(__VA_ARGS__)
