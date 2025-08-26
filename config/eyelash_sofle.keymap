@@ -1,16 +1,14 @@
-/*                                      SOFLE LAYOUT MAPPING
+/*
+                                       Sofle key matrix
 
-  ╭────────────────────────────┬────────────────────────────╮ ╭─────────────────────────────┬─────────────────────────────╮
-  │  0   1   2   3   4   5     │      6   7   8   9  10  11 │ │ LN5 LN4 LN3 LN2 LN1 LN0     │     RN0 RN1 RN2 RN3 RN4 RN5 │
-  │ 12  13  14  15  16  17     │     18  19  20  21  22  23 │ │ LT5 LT4 LT3 LT2 LT1 LT0     │     RT0 RT1 RT2 RT3 RT4 RT5 │
-  │ 24  25  26  27  28  29     │     30  31  32  33  34  35 │ │ LM5 LM4 LM3 LM2 LM1 LM0     │     RM0 RM1 RM2 RM3 RM4 RM5 │
-  │ 36  37  38  39  40  41  42 │ 43  44  45  46  47  48  49 │ │ LB5 LB4 LB3 LB2 LB1 LB0 LEC │ REC RB0 RB1 RB2 RB3 RB4 RB5 │
-  ╰───────╮ 50  51  52  53  54 │ 55  56  57  58  59 ╭───────╯ ╰───────╮ LH4 LH3 LH2 LH1 LH0 │ RH0 RH1 RH2 RH3 RH4 ╭───────╯
-          ╰────────────────────┴────────────────────╯                 ╰─────────────────────┴─────────────────────╯         */
-
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 800  // 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 15   // 10
-
+  ╭────────────────────────────┬────────────────────────────╮  ╭─────────────────────────────┬─────────────────────────────╮
+  │  0   1   2   3   4   5     │     7   8   9   10  11  12 │  │ LN0 LN1 LN2 LN3 LN4 LN5     │     RN0 RN1 RN2 RN3 RN4 RN5 │
+  │ 13  14  15  16  17  18     │     20  21  22  23  24  25 │  │ LT0 LT1 LT2 LT3 LT4 LT5     │     RT0 RT1 RT2 RT3 RT4 RT5 │
+  │ 26  27  28  29  30  31     │     33  34  35  36  37  38 │  │ LM0 LM1 LM2 LM3 LM4 LM5     │     RM0 RM1 RM2 RM3 RM4 RM5 │
+  │ 39  39  40  41  42  43     │     46  47  48  49  50  51 │  │ LB0 LB1 LB2 LB3 LB4 LB5     │     RB0 RB1 RB2 RB3 RB4 RB5 │
+  ╰───────╮ 53  54  55  56  57 │ 59  60  61  62  63 ╭───────╯  ╰───────╮ LH4 LH3 LH2 LH1 LH0 │ RH0 RH1 RH2 RH3 RH4 ╭───────╯
+          ╰────────────────────┴────────────────────╯                  ╰─────────────────────┴─────────────────────╯
+*/
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
@@ -24,6 +22,10 @@
 #include "labels.h"
 #include "macros.dtsi"
 #include "windows.h"
+
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 800  // 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 15   // 10
+
 
 #define BASE 0
 #define LOWER 1
@@ -48,242 +50,232 @@
 };
 
 
-/ {
+/*
+  Enables holding the first mod-tap key
+  by performing a tap-release-hold sequence.
+  To use it: "&qt KEYCODE1 KEYCODE2"
+*/
+ZMK_HOLD_TAP(quick_tap,
+    flavor          = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms    = <200>;
+    bindings        = <&kp>, <&kp>;
+)
 
-    behaviors {
-        /*
-            Enables holding the first mod-tap key
-            by performing a tap-release-hold sequence.
-            To use it: "&qt KEYCODE1 KEYCODE2"
-        */
-        qt: quick_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
-            bindings = <&kp>, <&kp>;
-        };
+/*
+  Pressing the key on its own will send an Escape keycode
+  but pressing it while a shift or GUI modifier is held sends the grave `
+  keycode instead
+*/
+ZMK_MOD_MORPH(gresc,
+    bindings = <&kp ESC>, <&kp GRAVE>;
+    mods     = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+)
 
-        /*
-            Pressing the key on its own will send an Escape keycode
-            but pressing it while a shift or GUI modifier is held sends the grave ` keycode instead
-        */
-        gresc: grave_escape {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp ESC>, <&kp GRAVE>;
-            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
-        };
+/*
+  Pressing the key on its own will send a Backspace keycode
+  but pressing it while a shift or GUI modifier is held sends the Delete
+  keycode instead
+*/
+ZMK_MOD_MORPH(backdel,
+    bindings = <&kp BACKSPACE>, <&kp DELETE>;
+    mods     = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+)
 
-        /*
-            Pressing the key on its own will send a Backspace keycode
-            but pressing it while a shift or GUI modifier is held sends the Delete keycode instead
-        */
-        backdel: backspace_delete {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp BACKSPACE>, <&kp DELETE>;
-            mods = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
-        };
+/*
+  Pressing the key on its own will send an @ keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(at,
+    bindings = <&kp IT_AT>, <&alt_at>;
+    mods     = <(MOD_LSFT|MOD_RSFT)>;
+)
 
-        /*
-            Pressing the key on its own will send an @ keycode
-            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
-        */
-        at_mt: at_mt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp IT_AT>, <&alt_at>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
+/*
+  Pressing the key on its own will send a ~ keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(tilde,
+    bindings = <&kp IT_TILDE>, <&alt_tilde>;
+    mods     = <(MOD_LSFT|MOD_RSFT)>;
+)
 
-        /*
-            Pressing the key on its own will send an ~ keycode
-            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
-        */
-        tilde_mt: tilde_mt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp IT_TILDE>, <&alt_tilde>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
+/*
+  Pressing the key on its own will send a # keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(hash,
+    bindings = <&kp IT_HASH>, <&alt_hash>;
+    mods     = <(MOD_LSFT|MOD_RSFT)>;
+)
 
-        /*
-            Pressing the key on its own will send an # keycode
-            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
-        */
-        hash_mt: hash_mt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp IT_HASH>, <&alt_hash>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        /*
-            Pressing the key on its own will send an ` keycode
-            but pressing it while a shift modifier is held sends the corresponding Alt Code keycode combination instead
-        */
-        bktk_mt: bktk_mt {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp IT_BKTK>, <&alt_bktk>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        test {
-            bindings = <&kp A>;
-            key-positions = <LH4 RH0>;
-        };
-
-        test2 {
-            bindings = <&kp A>;
-            key-positions = <LB0 RB5>;
-        };
-    };
-
-    macros {
-        // Turn off Windows
-        win_off: win_off {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings
-                = <&macro_press   &kp LWIN>
-                , <&macro_tap     &kp X>
-                , <&macro_release &kp LWIN>
-                , <&macro_tap     &kp U &kp U>
-                ;
-        };
-
-        // Custom macros for the Alt code tables
-        EMULATE_ALT(at, WIN_AT)
-        EMULATE_ALT(hash, WIN_HASH)
-        EMULATE_ALT(tilde, WIN_TILDE)
-        EMULATE_ALT(bktk, WIN_BKTK)
-
-        // Custom macros for switching between bluetooth profiles
-        BT_PROFILE(0)
-        BT_PROFILE(1)
-        BT_PROFILE(2)
-    };
+/*
+  Pressing the key on its own will send a ` keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(backtick,
+    bindings = <&kp IT_BKTK>, <&alt_bktk>;
+    mods     = <(MOD_LSFT|MOD_RSFT)>;
+)
 
 
-    scroll_encoder: scroll_encoder {
-        compatible = "zmk,behavior-sensor-rotate";
-        #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-        tap-ms = <100>;
-    };
+/*
+  Combo enabled pressing both shift keys
+*/
+ZMK_COMBO(test1,
+    bindings      = <&kp A>;
+    key-positions = <LH4 RH0>;
+)
 
-   // Activate ADJUST layer by pressing raise and lower
-   ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
+/*
+  Combo enabled pressing both space keys
+*/
+ZMK_COMBO(test2,
+    bindings      = <&kp A>;
+    key-positions = <LB0 RB5>;
+)
 
 
-    keymap {
-        compatible = "zmk,keymap";
+// Activate ADJUST layer by pressing raise and lower
+ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
 
-        master {
-        /* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
-         * │  ESC  │   1   │   2   │   3   │   4   │   5   │   ↑   │   6   │   7   │   8   │   9   │   0   │ Backspace │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │  TAB  │   Q   │   W   │   E   │   R   │   T   │   ↓   │   Y   │   U   │   I   │   O   │   P   │    \      │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │ CAPS  │   A   │   S   │   D   │   F   │   G   │   ←   │   H   │   J   │   K   │   L   │   ;   │    '      │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │ LSFT  │   Z   │   X   │   C   │   V   │   B   │   →   │   N   │   M   │   ,   │   .   │   /   │   RSFT    │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │ MUTE  │ LCTRL │ LGUI  │ LALT  │ MO(1) │ SPACE │       │ SPACE │ ENTER │ ENTER │ MO(2) │DELETE │ RSHIFT    │
-         * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
-         */
-            bindings = <
-&gresc      &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &kp UP_ARROW     &kp N6     &kp N7     &kp N8     &kp N9      &kp N0     &kp BACKSPACE
-&kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T      &kp DOWN_ARROW   &kp Y      &kp U      &kp I      &kp O       &kp P      &kp BSLH
-&kp CAPS    &kp A      &kp S      &kp D      &kp F      &kp G      &kp LEFT_ARROW   &kp H      &kp J      &kp K      &kp L       &kp SEMI   &kp APOS
-&kp LSHFT   &kp Z      &kp X      &kp C      &kp V      &kp B      &kp RIGHT_ARROW  &kp N      &kp M      &kp COMMA  &kp DOT     &kp FSLH   &kp RSHIFT
-&kp C_MUTE  &kp LCTRL  &kp LGUI   &kp LALT   &mo LOWER  &kp SPACE  &kp ENTER        &kp SPACE  &kp ENTER  &mo RAISE  &kp RSHIFT  &kp DELETE
-            >;
+// Turn off Windows
+ZMK_MACRO(win_off,
+    wait-ms = <40>;
+    tap-ms  = <40>;
+    bindings = <&macro_press     &kp LWIN>
+               , <&macro_tap     &kp X>
+               , <&macro_release &kp LWIN>
+               , <&macro_tap     &kp U &kp U>
+)
 
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
-            display-name = "master";
-        };
+// Custom macro to generate @ using the alt code table
+ZMK_MACRO_ALT_CODE(alt_at, WIN_AT)
+// Custom macro to generate # using the alt code table
+ZMK_MACRO_ALT_CODE(alt_hash, WIN_AT)
+// Custom macro to generate ~ using the alt code table
+ZMK_MACRO_ALT_CODE(alt_tilde, WIN_AT)
+// Custom macro to generate ` using the alt code table
+ZMK_MACRO_ALT_CODE(alt_bktk, WIN_AT)
 
-        layer1 {
-        /* ┌───────┬────────┬────────┬────────┬────────┬────────┬───────┬────────┬────────┬────────┬────────┬────────┬────────┐
-         * │ GRAVE │   F1   │   F2   │   F3   │   F4   │   F5   │   ↑   │   F6   │   F7   │   F8   │   F9   │  F10   │        │
-         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
-         * │       │ GRAVE  │ M_LCLK │ M_MCLK │ M_RCLK │  NONE  │   ↓   │ PG_UP  │  HOME  │   ↑    │  END   │   -    │   =    │
-         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
-         * │       │ TILDE  │        │        │        │  NONE  │   ←   │ PG_DN  │   ←    │   ↓    │   →    │   [    │   ]    │
-         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
-         * │       │ RGB_OFF│ RGB_ON │RGB_EFF │RGB_EFR │RGB_SPI │   →   │RGB_BRD │RGB_BRI │ INSERT │  F11   │  F12   │        │
-         * ├───────┼────────┼────────┼────────┼────────┼────────┼───────┼────────┼────────┼────────┼────────┼────────┼────────┤
-         * │ MUTE  │        │        │        │        │        │M_LCLK │        │        │        │        │        │        │
-         * └───────┴────────┴────────┴────────┴────────┴────────┴───────┴────────┴────────┴────────┴────────┴────────┴────────┘
-         */
+// Rotator encoder customization
+ZMK_ROTATOR_ENCODER(scroll_encoder,
+    bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+    tap-ms   = <100>;
+)
+
+
+// KEYMAPS
+
+
+// ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+// │         │         │         │         │         │         │                                 │         │         │         │         │         │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │         │         │         │         │         │                                 │         │         │         │         │         │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │         │         │         │         │         │                                 │         │         │         │         │         │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │         │         │         │         │         │         │             │         │         │         │         │         │         │         │
+// ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+//           │         │         │         │         │         │                                 │         │         │         │         │         │
+//           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
+
+
+// ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+// │ ESC     │  1      │ 2       │ 3       │ 4       │ 5       │                                 │ 6       │ 7       │ 8       │ 9       │ 0       │BACKSPACE│
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │ TAB     │  Q      │ W       │ E       │ R       │ T       │                                 │ Y       │ U       │ I       │ O       │ P       │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │ CAPS    │  A      │ S       │ D       │ F       │ G       │                                 │ H       │ J       │ K       │ L       │ ;       │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │ LSHIFT  │  Z      │ X       │ C       │ V       │ B       │ MUTE    │             │↑↓  ←  → │ N       │ M       │ ,       │ .       │         │ RSHIFT  │
+// ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+//           │  LCTRL  │ LGUI    │ LALT    │ MO(1)   │ SPACE   │                                 │ SPACE   │ ENTER   │ MO(2)   │         │ DELETE  │
+//           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
+
+ZMK_LAYER(master,
+    &gresc     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP_ARROW   &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
+    &kp TAB    &kp Q         &kp W         &kp E         &kp R         &kp T         &kp DOWN_ARROW &kp Y         &kp U         &kp I         &kp O         &kp P         &kp BSLH
+    &kp CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp LEFT_ARROW &kp H         &kp J         &kp K         &kp L         &kp SEMI      &kp APOS
+    &kp LSHFT  &kp Z         &kp X         &kp C         &kp V         &kp B         &kp RIGHT_ARROW&kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp RSHIFT
+    &kp C_MUTE &kp LCTRL     &kp LGUI      &kp LALT      &mo LOWER     &kp SPACE     &kp ENTER      &kp SPACE     &kp ENTER     &mo RAISE     &kp RSHIFT    &kp DELETE
+    , sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+)
+
+
+// ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+// │ GRAVE   │ F1      │ F2      │ F3      │ F4      │ F5      │                                 │ F6      │ F7      │ F8      │ F9      │ F10     │         │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ GRAVE   │ M_LCLK  │ M_MCLK  │ M_RCLK  │ NONE    │                                 │ PG_UP   │ HOME    │  ↑      │ END     │ -       │ =       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ TILDE   │         │         │         │ NONE    │                                 │ PG_DOWN │ ←       │  ↓      │  →      │ [       │ ]       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
+// ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 // TODO: Rethink the layout as it seems that some keys are currently wasted
-bindings = <
-  &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
-  ___          &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
-  ___          &tilde_mt     ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
-  ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
-  &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK  ___          ___          ___           ___          ___
->;
-            display-name = "layer1";
-            sensor-bindings = <&scroll_encoder>;
-        };
+ZMK_LAYER(layer1,
+    &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
+    ___          &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
+    ___          &tilde_mt     ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
+    ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
+    &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK   ___          ___          ___           ___          ___
+    , sensor-bindings = <&scroll_encoder>
+)
 
-        layer2 {
-        /* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
-         * │  F1   │  F2   │  F3   │  F4   │  F5   │  F6   │   ↑   │  F7   │  F8   │  F9   │  F10  │  F11  │   F12     │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │       │ NONE  │ NONE  │       │       │OUT_TOG│   ↓   │       │       │       │       │   _   │    +      │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │       │  @    │  #    │  ~    │  `    │       │   ←   │   <   │   >   │       │       │   [   │    ]      │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │       │       │       │       │       │       │   →   │   {   │   }   │ NONE  │ NONE  │ RALT  │           │
-         * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
-         * │       │       │       │       │       │       │M_LCLK │       │       │       │       │       │           │
-         * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
-         */
-bindings = <
-  &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7           &kp F8           &kp F9      &kp F10      &kp F11        &kp F12
-  ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___              ___              ___         ___          &kp UNDER      &kp PLUS
-  ___          &at_mt       &hash_mt     &tilde_mt     &bktk_mt     ___           U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
-  ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT      &kp IT_RBKT      XXX         XXX          &kp RIGHT_ALT  ___
-  ___          ___          ___          ___           ___          ___           &mkp LCLK  ___              ___              ___         ___          ___
->;
+// ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+// │ F1      │ F2      │ F3      │ F4      │ F5      │ F6      │                                 │ F7      │ F8      │ F9      │ F10     │ F11     │ F12     │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ NONE    │ NONE    │         │         │ OUT_TOG │                                 │         │         │         │         │  _      │ +       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │         │         │         │         │         │         │             │↑↓  ←  → │ {       │ }       │ NONE    │ NONE    │ RALT    │         │
+// ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
+/* ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────────┐
+ * │ F1    │ F2    │ F3    │ F4    │ F5    │ F6    │ ↑     │ F7    │ F8    │ F9    │ F10   │ F11   │ F12       │
+ * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+ * │       │ NONE  │ NONE  │       │       │OUT_TOG│ ↓     │       │       │       │       │ _     │ +         │
+ * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+ * │       │ @     │ #     │ ~     │ `     │       │ ←     │ <     │ >     │       │       │ [     │ ]         │
+ * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+ * │       │       │       │       │       │       │ →     │ {     │ }     │ NONE  │ NONE  │ RALT  │           │
+ * ├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────────┤
+ * │       │       │       │       │       │       │ M_LCLK│       │       │       │       │       │           │
+ * └───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘
+ */
+ZMK_LAYER(layer2,
+    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7       &kp F8       &kp F9       &kp F10      &kp F11       &kp F12
+    ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___           ___           ___         ___          &kp UNDER    &kp PLUS
+    ___          &at          &hash        &tilde        &bktk        ___           U_MS_L     &kp IT_LESS  &kp IT_GREAT ___           ___          &kp IT_EACU  &kp IT_AST
+    ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT  &kp IT_RBKT  XXX          XXX          &kp RIGHT_ALT ___
+    ___          ___          ___          ___           ___          ___           &mkp LCLK   ___           ___           ___          ___          ___
+    , sensor-bindings = <&scroll_encoder>
+)
 
-            display-name = "layer2";
-            sensor-bindings = <&scroll_encoder>;
-        };
-
-        adjust_layer {
-        /* ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-         * │   F1    │   F2    │   F3    │   F4    │   F5    │   F6    │    ↑    │   F7    │   F8    │   F9    │   F10   │   F11   │   F12   │
-         * ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-         * │         │ NONE    │ NONE    │         │         │ OUT_TOG │    ↓    │         │         │         │         │   _     │   +     │
-         * ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-         * │         │   @     │   #     │   ~     │   [     │         │    ←    │   <     │   >     │         │         │   [     │   ]     │
-         * ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-         * │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │    →    │ RGB_BRD │ RGB_BRI │ INSERT  │  F11    │  F12    │         │
-         * ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-         * │ MUTE    │         │         │         │         │         │ M_LCLK  │         │         │         │         │         │         │
-         * └─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┴─────────┘
-         */
-            bindings = <
-  &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7           &kp F8           &kp F9      &kp F10      &kp F11        &kp F12
-  ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___              ___              ___         ___          &kp UNDER      &kp PLUS
-  ___          &at_mt       &hash_mt     &tilde_mt     &bktk_mt     ___          U_MS_L     &kp IT_LESS      &kp IT_GREAT     ___         ___          &kp IT_EACU    &kp IT_AST
-  ___          U_RGB_OFF    U_RGB_ON     U_RGB_EFF     U_RGB_EFR   U_RGB_SPI     U_MS_R     U_RGB_BRD        U_RGB_BRI        ___         ___          ___            ___
-  ___          ___          ___          ___           ___         ___           &mkp LCLK  ___              ___              ___         ___          ___
-            >;
-            display-name = "adjust";
-        };
-
-    };
-};
+// ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+// │ F1      │ F2      │ F3      │ F4      │ F5      │ F6      │                                 │ F7      │ F8      │ F9      │ F10     │ F11     │ F12     │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ NONE    │ NONE    │         │         │ OUT_TOG │                                 │         │         │         │         │  _      │ +       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
+// ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
+ZMK_LAYER(adjust,
+    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7       &kp F8         &kp F9     &kp F10      &kp F11      &kp F12
+    ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___          ___            ___        ___          &kp UNDER    &kp PLUS
+    ___          &at          &hash        &tilde        &bktk        ___          U_MS_L     &kp IT_LESS  &kp IT_GREAT   ___        ___          &kp IT_EACU  &kp IT_AST
+    ___          U_RGB_OFF    U_RGB_ON     U_RGB_EFF     U_RGB_EFR   U_RGB_SPI     U_MS_R     U_RGB_BRD    U_RGB_BRI      ___        ___          ___         ___
+    ___          ___          ___          ___           ___         ___           &mkp LCLK  ___          ___            ___        ___          ___
+    , sensor-bindings = <&scroll_encoder>
+)
