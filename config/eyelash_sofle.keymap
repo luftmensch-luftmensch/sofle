@@ -61,16 +61,6 @@ ZMK_HOLD_TAP(quick_tap,
 )
 
 /*
-  Pressing the key on its own will send an Escape keycode
-  but pressing it while a shift or GUI modifier is held sends the grave `
-  keycode instead
-*/
-ZMK_MOD_MORPH(gesc,
-    bindings = <&kp ESC>, <&kp GRAVE>;
-    mods     = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
-)
-
-/*
   Pressing the key on its own will send a Backspace keycode
   but pressing it while a shift or GUI modifier is held sends the Delete
   keycode instead
@@ -79,6 +69,8 @@ ZMK_MOD_MORPH(backdel,
     bindings = <&kp BACKSPACE>, <&kp DELETE>;
     mods     = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
 )
+
+
 
 /*
   Pressing the key on its own will send an @ keycode
@@ -199,8 +191,9 @@ ZMK_ROTATOR_ENCODER(scroll_encoder,
 //           │  LCTRL  │ LGUI    │ LALT    │ MO(1)   │ SPACE   │                                 │ SPACE   │ ENTER   │ MO(2)   │         │ DELETE  │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 
+// NB: I didn't declared a behavior for the gresc keybinding as it is already defined at https://github.com/zmkfirmware/zmk/blob/main/app/dts/behaviors/gresc.dtsi
 ZMK_LAYER(master,
-    &gesc      &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP_ARROW   &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
+    &gresc     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP_ARROW   &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
     &kp TAB    &kp Q         &kp W         &kp E         &kp R         &kp T         &kp DOWN_ARROW &kp Y         &kp U         &kp I         &kp O         &kp P         &kp BSLH
     &kp CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp LEFT_ARROW &kp H         &kp J         &kp K         &kp L         &kp SEMI      &kp APOS
     &kp LSHFT  &kp Z         &kp X         &kp C         &kp V         &kp B         &kp RIGHT_ARROW&kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp RSHIFT
