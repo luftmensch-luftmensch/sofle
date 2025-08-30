@@ -8,45 +8,31 @@
                                             __/ |
                                            |___/
 */
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 800  // 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 15   // 10
-
-#include <input/processors.dtsi>
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/outputs.h>
-#include "locales.h"
-#include "labels.h"
-#include "macros.dtsi"
-#include "windows.h"
 
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
 #define ADJUST 3
+#define SYS 4
+#define FN 5
 
+// Make the keymap section less noisy
+#define XXX &none
+#define ___ &trans
 
-&mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
+#include "matrix.h"
+#include "keycodes.h"
+#include "helpers.h"
+#include "mouse.dtsi"
+#include "combos.dtsi"
 
-&msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
-
-&msc {
-    acceleration-exponent = <0>;      // 0
-    time-to-max-speed-ms = <200>;     // 300
-    delay-ms = <0>;                   // 0
-};
-
-&mmv {
-    time-to-max-speed-ms = <500>;
-    acceleration-exponent = <1>;
-    trigger-period-ms = <16>;
-};
-
+/* Global defaults */
 
 /*
   Enables holding the first mod-tap key
@@ -111,16 +97,6 @@ ZMK_MOD_MORPH(bktk,
     bindings = <&kp IT_BKTK>, <&alt_bktk>;
     mods     = <(MOD_LSFT|MOD_RSFT)>;
 )
-
-
-/*
-  Combo enabled pressing both shift keys
-*/
-ZMK_COMBO(test1, &kp A, LH4 RH0)
-/*
-  Combo enabled pressing both space keys
-*/
-ZMK_COMBO(test2, &kp A, LB0 RB5)
 
 // Activate ADJUST layer by pressing raise and lower
 ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
@@ -215,7 +191,7 @@ ZMK_LAYER(master,
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 // TODO: Rethink the layout as it seems that some keys are currently wasted
 ZMK_LAYER(layer1,
-    &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
+    &gresc       &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
     ___          &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
     ___          &tilde        ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
     ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
@@ -250,7 +226,7 @@ ZMK_LAYER(layer2,
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
+// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
 //           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯

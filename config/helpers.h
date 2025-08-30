@@ -1,6 +1,6 @@
 // clang-format off
 /*
- * macros.h
+ * helpers.h
  *
  * Convenience macros simplifying ZMK's keymap configuration.
  */
@@ -14,20 +14,6 @@
 #define CONCAT_(a, b) a##b
 #define CONCAT(a, b) CONCAT_(a, b)
 
-// Make the keymap section less noisy
-#define XXX &none
-#define ___ &trans
-
-
-// Handy mouse related definition
-#define U_MS_U &mmv MOVE_UP
-#define U_MS_D &mmv MOVE_DOWN
-#define U_MS_L &mmv MOVE_LEFT
-#define U_MS_R &mmv MOVE_RIGHT
-#define U_WH_U &msc SCRL_UP
-#define U_WH_D &msc SCRL_DOWN
-#define U_WH_L &msc SCRL_LEFT
-#define U_WH_R &msc SCRL_RIGHT
 
 // Handy rgb related definition
 #define U_RGB_OFF   &rgb_ug RGB_OFF
@@ -37,30 +23,6 @@
 #define U_RGB_SPI   &rgb_ug RGB_SPI
 #define U_RGB_BRD   &rgb_ug RGB_BRD
 #define U_RGB_BRI   &rgb_ug RGB_BRI
-
-/*
- * maps to `timeout-ms`
- * Keys must be both pressed within this time
- *
- * if too slow = false positives in rolls
- * if too fast = types out both letters instead
- */
-#define COMBO_TERM_FAST 25
-#define COMBO_TERM_SLOW 50
-
-/**
- * maps to `require-prior-idle-ms`
- * Must have no keys outside the combo pressed in this time before it
- *
- * if too slow = combo doesn't trigger when needed
- * if too fast = combo will trigger in normal typing
- */
-#define COMBO_IDLE_FAST 170
-#define COMBO_IDLE_SLOW 80
-
-
-// reusable arrow keys ← ↓ ↑ →
-#define ARROWS  &kp LEFT &kp DOWN &kp UP &kp RIGHT
 
 /* ZMK_BEHAVIOR */
 
@@ -138,7 +100,6 @@
     };
 
 /* ZMK_COMBOS */
-
 #define ALL 0xff
 #if !defined COMBO_TERM
     #define COMBO_TERM 30
@@ -169,7 +130,6 @@
     };
 
 /* ZMK_LEADER_SEQUENCE */
-
 #define ZMK_LEADER_SEQUENCE(...) CONCAT(ZMK_LEADER_SEQUENCE_, VARGS(__VA_ARGS__))(__VA_ARGS__)
 #define ZMK_LEADER_SEQUENCE_3(name, leader_bindings, sequence) \
     / { \
@@ -197,7 +157,6 @@
     };
 
 /* ZMK_CONDITIONAL_LAYER */
-
 #define ZMK_CONDITIONAL_LAYER(name, if_layers, then_layer) \
     / { \
         conditional_layers { \

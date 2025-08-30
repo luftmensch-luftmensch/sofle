@@ -1,0 +1,42 @@
+// clang-format off
+/*
+                                                               Sofle key matrix / layout mapping
+
+  ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+  │   LN0   │   LN1   │   LN2   │   LN3   │   LN4   │   LN5   │                                 │   RN0   │   RN1   │   RN2   │   RN3   │   RN4   │   RN5   │ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+  │   LT0   │   LT1   │   LT2   │   LT3   │   LT4   │   LT5   │                                 │   RT0   │   RT1   │   RT2   │   RT3   │   RT4   │   RT5   │
+  ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+  │   LM0   │   LM1   │   LM2   │   LM3   │   LM4   │   LM5   │                                 │   RM0   │   RM1   │   RM2   │   RM3   │   RM4   │   RM5   │
+  ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+  │   LB0   │   LB1   │   LB2   │   LB3   │   LB4   │   LB5   │ ROTATOR │             │  MOUSE  │   RB0   │   RB1   │   RB2   │   RB3   │   RB4   │   RB5   │
+  ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
+            │   LH0   │   LH1   │   LH2   │   LH3   │   LH4   │                                 │   RH0   │   RH1   │   RH2   │   RH3   │   RH4   │
+            ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
+*/
+// clang-format on
+
+/**
+ * maps to `timeout-ms`
+ * Keys must be both pressed within this time
+ *
+ * if too slow = false positives in rolls
+ * if too fast = types out both letters instead
+ */
+#define COMBO_TERM_FAST 25
+#define COMBO_TERM_SLOW 50
+
+/**
+ * maps to `require-prior-idle-ms`
+ * Must have no keys outside the combo pressed in this time before it
+ *
+ * if too slow = combo doesn't trigger when needed
+ * if too fast = combo will trigger in normal typing
+ */
+#define COMBO_IDLE_FAST 170
+#define COMBO_IDLE_SLOW 80
+
+// Combo enabled pressing both space keys
+ZMK_COMBO(test1, &kp A, LH4 RH0)
+
+// Combo enabled pressing both shift keys
+ZMK_COMBO(test2, &kp A, LB0 RB5)
