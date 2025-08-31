@@ -98,6 +98,16 @@ ZMK_MOD_MORPH(bktk,
     mods     = <(MOD_LSFT|MOD_RSFT)>;
 )
 
+/*
+  Pressing the key on its own will send a - keycode
+  but pressing it while a shift modifier is held sends
+  the + keycode instead
+*/
+ZMK_MOD_MORPH(plmin,
+    bindings = <&kp FSLH>, <&kp RBKT>;
+    mods     = <(MOD_LALT|MOD_RALT)>;
+)
+
 // Activate ADJUST layer by pressing raise and lower
 ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
 
@@ -158,41 +168,42 @@ ZMK_ROTATOR_ENCODER(scroll_encoder,
 // ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
 // │ ESC     │  1      │ 2       │ 3       │ 4       │ 5       │                                 │ 6       │ 7       │ 8       │ 9       │ 0       │BACKSPACE│
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │ TAB     │  Q      │ W       │ E       │ R       │ T       │                                 │ Y       │ U       │ I       │ O       │ P       │         │
+// │ TAB     │  Q      │ W       │ E       │ R       │ T       │                                 │ Y       │ U       │ I       │ O       │ P       │ ù       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │ CAPS    │  A      │ S       │ D       │ F       │ G       │                                 │ H       │ J       │ K       │ L       │ ;       │         │
+// │ CAPS    │  A      │ S       │ D       │ F       │ G       │                                 │ H       │ J       │ K       │ L       │ ò       │ à       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │ LSHIFT  │  Z      │ X       │ C       │ V       │ B       │ MUTE    │             │↑↓  ←  → │ N       │ M       │ ,       │ .       │         │ RSHIFT  │
+// │ LSHIFT  │  Z      │ X       │ C       │ V       │ B       │ MUTE    │             │↑↓  ←  → │ N       │ M       │ ,       │ .       │ -       │ RSHIFT  │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
-//           │  LCTRL  │ LGUI    │ LALT    │ MO(1)   │ SPACE   │                                 │ SPACE   │ ENTER   │ MO(2)   │         │ DELETE  │
+//           │  LCTRL  │ LGUI    │ LALT    │ MO(1)   │ SPACE   │                                 │ SPACE   │ ENTER   │ MO(2)   │ RALT    │ DELETE  │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 
 // NB: I didn't declared a behavior for the gresc keybinding as it is already defined at https://github.com/zmkfirmware/zmk/blob/main/app/dts/behaviors/gresc.dtsi
 ZMK_LAYER(master,
-    &gresc     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP_ARROW   &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
-    &kp TAB    &kp Q         &kp W         &kp E         &kp R         &kp T         &kp DOWN_ARROW &kp Y         &kp U         &kp I         &kp O         &kp P         &kp BSLH
-    &kp CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp LEFT_ARROW &kp H         &kp J         &kp K         &kp L         &kp SEMI      &kp APOS
-    &kp LSHFT  &kp Z         &kp X         &kp C         &kp V         &kp B         &kp RIGHT_ARROW&kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp RSHIFT
-    &kp C_MUTE &kp LCTRL     &kp LGUI      &kp LALT      &mo LOWER     &kp SPACE     &kp ENTER      &kp SPACE     &kp ENTER     &mo RAISE     &kp RSHIFT    &kp DELETE
+    &gresc     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP      &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
+    &kp TAB    &kp Q         &kp W         &kp E         &kp R         &kp T         &kp DOWN    &kp Y         &kp U         &kp I         &kp O         &kp P         &kp BSLH
+    &kp CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp LEFT    &kp H         &kp J         &kp K         &kp L         &kp SEMI      &kp APOS
+    &kp LSHFT  &kp Z         &kp X         &kp C         &kp V         &kp B         &kp RIGHT   &kp N         &kp M         &kp COMMA     &kp DOT       &plmin        &kp RSHIFT
+    &kp C_MUTE &kp LCTRL     &kp LGUI      &kp LALT      &mo LOWER     &kp SPACE     &kp ENTER   &kp SPACE     &kp ENTER     &mo RAISE     &kp RALT      &kp DELETE
     , &inc_dec_kp C_VOLUME_UP C_VOL_DN
 )
 
 
 // ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
-// │ GRAVE   │ F1      │ F2      │ F3      │ F4      │ F5      │                                 │ F6      │ F7      │ F8      │ F9      │ F10     │         │
+// │ GRESC   │ F1      │ F2      │ F3      │ F4      │ F5      │                                 │ F6      │ F7      │ F8      │ F9      │ F10     │         │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ GRAVE   │ M_LCLK  │ M_MCLK  │ M_RCLK  │ NONE    │                                 │ PG_UP   │ HOME    │  ↑      │ END     │ -       │ =       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ TILDE   │         │         │         │ NONE    │                                 │ PG_DOWN │ ←       │  ↓      │  →      │ [       │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
+// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │  MUTE   │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
+// │         │         │         │         │         │         │         │             │         │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
-//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           │         │         │         │         │         │                                 │         │         │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 // TODO: Rethink the layout as it seems that some keys are currently wasted
 ZMK_LAYER(layer1,
-    &gresc       &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
-    ___          &kp GRAVE     &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
+    &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
+    ___          ___           &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
     ___          &tilde        ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
     ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
     &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK   ___          ___          ___           ___          ___
@@ -207,15 +218,16 @@ ZMK_LAYER(layer1,
 // │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │         │         │         │         │         │         │             │↑↓  ←  → │ {       │ }       │ NONE    │ NONE    │ RALT    │         │
+// │         │         │         │         │         │         │         │             │  M_LCLK │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
-//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           │         │         │         │         │         │                                 │         │         │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 ZMK_LAYER(layer2,
-    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7       &kp F8       &kp F9       &kp F10      &kp F11       &kp F12
-    ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___           ___           ___         ___          &kp UNDER    &kp PLUS
-    ___          &at          &hash        &tilde        &bktk        ___           U_MS_L     &kp IT_LESS  &kp IT_GREAT ___           ___          &kp IT_EACU  &kp IT_AST
-    ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT  &kp IT_RBKT  XXX          XXX          &kp RIGHT_ALT ___
-    ___          ___          ___          ___           ___          ___           &mkp LCLK   ___           ___           ___          ___          ___
+    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7       &kp F8       &kp F9      &kp F10      &kp F11       &kp F12
+    ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___          ___          ___         ___          &kp UNDER     &kp PLUS
+    ___          &at          &hash        &tilde        &bktk        ___           U_MS_L     &kp IT_LESS  &kp IT_GREAT ___         ___          &kp IT_EACU   &kp IT_AST
+    ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT  &kp IT_RBKT  XXX         XXX          &kp RIGHT_ALT  ___
+    ___          ___          ___          ___           ___          ___           &mkp LCLK   ___           ___        ___         ___          ___
     , &scroll_encoder
 )
 
@@ -227,8 +239,9 @@ ZMK_LAYER(layer2,
 // │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │         │         │         │         │
+// │         │         │         │         │         │         │         │             │  M_LCLK │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
-//           │         │         │         │         │         │                                 │         │ M_LCLK  │         │         │         │
+//           │         │         │         │         │         │                                 │         │         │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 ZMK_LAYER(adjust,
     &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7       &kp F8         &kp F9     &kp F10      &kp F11      &kp F12

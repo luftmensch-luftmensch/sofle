@@ -35,8 +35,9 @@
 #define COMBO_IDLE_FAST 170
 #define COMBO_IDLE_SLOW 80
 
-// Combo enabled pressing both space keys
-ZMK_COMBO(test1, &kp A, LH4 RH0)
 
-// Combo enabled pressing both shift keys
-ZMK_COMBO(test2, &kp A, LB0 RB5)
+// Pressing both shift keys toggles the LOWER Layer (1)
+ZMK_COMBO(lower, &tog LOWER, LB0 RB5)
+
+// Pressing both space keys toggles the RAISE Layer (2)
+ZMK_COMBO(raise, &tog RAISE, LH4 RH0)
