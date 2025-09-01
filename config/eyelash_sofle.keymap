@@ -27,7 +27,12 @@
 #define ___ &trans
 
 #include "matrix.h"
-#include "keycodes.h"
+
+// Needed for my sanity generating the keymap layout
+#ifndef KEYMAP_DRAWER
+	#include "keycodes.h"
+#endif
+
 #include "helpers.h"
 #include "mouse.dtsi"
 #include "combos.dtsi"

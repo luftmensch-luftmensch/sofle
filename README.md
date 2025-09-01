@@ -2,7 +2,7 @@ This is my personal [ZMK firmware](https://github.com/zmkfirmware/zmk/) configur
 
 # Current Layout Setup
 
-![Current layout](./layout/eyelash_sofle.svg)
+![Current layout](./layout/layout.svg)
 
 # Building the firmware
 

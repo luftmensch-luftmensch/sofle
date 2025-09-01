@@ -41,3 +41,6 @@ ZMK_COMBO(lower, &tog LOWER, LB0 RB5)
 
 // Pressing both space keys toggles the RAISE Layer (2)
 ZMK_COMBO(raise, &tog RAISE, LH4 RH0)
+
+// Pressing j & k keys gives the Escape key (0)
+ZMK_COMBO(vesc, &kp ESC, RM1 RM2, BASE)
