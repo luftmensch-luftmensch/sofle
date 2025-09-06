@@ -2,13 +2,13 @@ draw_config:
   dark_mode: true
   n_columns: 1
   draw_key_sides: true
-  separate_combo_diagrams: false
+  separate_combo_diagrams: true
   combo_diagrams_scale: 2
   key_w: 60.0
   key_h: 56.0
   split_gap: 30.0
-  combo_w: 28.0
-  combo_h: 26.0
+  combo_w: 40.0
+  combo_h: 40.0
   key_rx: 6.0
   key_ry: 6.0
   inner_pad_w: 2.0
