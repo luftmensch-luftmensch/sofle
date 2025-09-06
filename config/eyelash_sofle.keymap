@@ -113,6 +113,34 @@ ZMK_MOD_MORPH(plmin,
     mods     = <(MOD_LALT|MOD_RALT)>;
 )
 
+/*
+  Pressing the key on its own will cycle the rgb effect
+  but pressing it while a modifier (alt/shift) is held will cycle
+  the effect in reverse mode
+*/
+ZMK_MOD_MORPH(rgb_eff,
+    bindings = <U_RGB_EFF>, <U_RGB_EFR>;
+    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+)
+
+/*
+  Pressing the key on its own will increase the rgb effect speed
+  but pressing it while a modifier (alt/shift) is held will decrease it
+*/
+ZMK_MOD_MORPH(rgb_speed,
+    bindings = <U_RGB_SPI>, <U_RGB_SPD>;
+    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+)
+
+/*
+  Pressing the key on its own will increase the rgb effect brightness
+  but pressing it while a modifier (alt/shift) is held will decrease it
+*/
+ZMK_MOD_MORPH(rgb_brig,
+    bindings = <U_RGB_BRI>, <U_RGB_BRD>;
+    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+)
+
 // Activate ADJUST layer by pressing raise and lower
 ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
 
@@ -200,8 +228,8 @@ ZMK_LAYER(master,
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ TILDE   │         │         │         │ NONE    │                                 │ PG_DOWN │ ←       │  ↓      │  →      │ [       │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │  MUTE   │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │ INSERT  │ F11     │ F12     │         │
-// │         │         │         │         │         │         │         │             │         │         │         │         │         │         │         │
+// │         │ RGB_TOG │   RGB   │   RGB   │   RGB   │         │  MUTE   │             │↑↓  ←  → │         │         │ INSERT  │ F11     │ F12     │         │
+// │         │         │  EFFECT │  SPEED  │  BRIGHT │         │         │             │ M_LCLK  │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
 //           │         │         │         │         │         │                                 │         │         │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
@@ -210,8 +238,8 @@ ZMK_LAYER(layer1,
     &kp GRAVE    &kp F1        &kp F2        &kp F3        &kp F4        &kp F5       U_MS_U     &kp F6       &kp F7       &kp F8        &kp F9       &kp F10       ___
     ___          ___           &mkp LCLK     &mkp MCLK     &mkp RCLK     XXX          U_MS_D     &kp PG_UP    &kp HOME     &kp UP        &kp END      &kp MINUS     &kp EQUAL
     ___          &tilde        ___           ___           ___           XXX          U_MS_L     &kp PG_DN    &kp LEFT     &kp DOWN      &kp RIGHT    &kp LBKT      &kp RBKT
-    ___          U_RGB_OFF     U_RGB_ON      U_RGB_EFF     U_RGB_EFR     U_RGB_SPI    U_MS_R     U_RGB_BRD    U_RGB_BRI    &kp INSERT    &kp F11      &kp F12       ___
-    &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK   ___          ___          ___           ___          ___
+    ___          U_RGB_TOG     &rgb_eff      &rgb_speed    &rgb_brig     ___          U_MS_R     ___          ___          &kp INSERT    &kp F11      &kp F12       ___
+    &kp C_MUTE   ___           ___           ___           ___           ___          &mkp LCLK  ___          ___          ___           ___          ___
     , &scroll_encoder
 )
 
@@ -243,16 +271,16 @@ ZMK_LAYER(layer2,
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ @       │ #       │ ~       │ `       │         │                                 │ <       │ >       │         │         │  [      │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ RGB_OFF │ RGB_ON  │ RGB_EFF │ RGB_EFR │ RGB_SPI │ MUTE    │             │↑↓  ←  → │ RGB_BRD │ RGB_BRI │         │         │         │         │
-// │         │         │         │         │         │         │         │             │  M_LCLK │         │         │         │         │         │         │
+// │         │ RGB_TOG │   RGB   │   RGB   │   RGB   │         │  MUTE   │             │↑↓  ←  → │         │         │ INSERT  │ F11     │ F12     │         │
+// │         │         │  EFFECT │  SPEED  │  BRIGHT │         │         │             │ M_LCLK  │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
 //           │         │         │         │         │         │                                 │         │         │         │         │         │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 ZMK_LAYER(adjust,
-    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7       &kp F8         &kp F9     &kp F10      &kp F11      &kp F12
-    ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___          ___            ___        ___          &kp UNDER    &kp PLUS
-    ___          &at          &hash        &tilde        &bktk        ___          U_MS_L     &kp IT_LESS  &kp IT_GREAT   ___        ___          &kp IT_EACU  &kp IT_AST
-    ___          U_RGB_OFF    U_RGB_ON     U_RGB_EFF     U_RGB_EFR   U_RGB_SPI     U_MS_R     U_RGB_BRD    U_RGB_BRI      ___        ___          ___         ___
-    ___          ___          ___          ___           ___         ___           &mkp LCLK  ___          ___            ___        ___          ___
+    &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7       &kp F8         &kp F9       &kp F10   &kp F11      &kp F12
+    ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___          ___            ___          ___       &kp UNDER    &kp PLUS
+    ___          &at          &hash        &tilde        &bktk        ___          U_MS_L     &kp IT_LESS  &kp IT_GREAT   ___          ___       &kp IT_EACU  &kp IT_AST
+    ___          U_RGB_TOG    &rgb_eff     &rgb_speed    &rgb_brig    ___          U_MS_R     ___          ___            ___          ___       ___          ___
+    ___          ___          ___          ___           ___          ___          &mkp LCLK  ___          ___            ___        ___         ___
     , &scroll_encoder
 )

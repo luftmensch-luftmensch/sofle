@@ -18,9 +18,11 @@
 // Handy rgb related definition
 #define U_RGB_OFF   &rgb_ug RGB_OFF
 #define U_RGB_ON    &rgb_ug RGB_ON
+#define U_RGB_TOG   &rgb_ug RGB_TOG
 #define U_RGB_EFF   &rgb_ug RGB_EFF
 #define U_RGB_EFR   &rgb_ug RGB_EFR
 #define U_RGB_SPI   &rgb_ug RGB_SPI
+#define U_RGB_SPD   &rgb_ug RGB_SPD
 #define U_RGB_BRD   &rgb_ug RGB_BRD
 #define U_RGB_BRI   &rgb_ug RGB_BRI
 

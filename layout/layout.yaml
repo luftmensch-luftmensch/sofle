@@ -103,14 +103,14 @@ layers:
     - '['
     - ']'
     - {t: '$$mdi:transfer$$', type: trans}
-    - RGB OFF
-    - RGB ON
-    - RGB EFF
-    - RGB EFR
-    - RGB SPI
+    - RGB TOG
+    - {t: RGB EFF, s: RGB EFR}
+    - {t: RGB SPI, s: RGB SPD}
+    - {t: RGB BRI, s: RGB BRD}
+    - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
-    - RGB BRD
-    - RGB BRI
+    - {t: '$$mdi:transfer$$', type: trans}
+    - {t: '$$mdi:transfer$$', type: trans}
     - INSERT
     - F11
     - F12
@@ -233,14 +233,14 @@ layers:
     - è
     - '*'
     - {t: '$$mdi:transfer$$', type: trans}
-    - RGB OFF
-    - RGB ON
-    - RGB EFF
-    - RGB EFR
-    - RGB SPI
+    - RGB TOG
+    - {t: RGB EFF, s: RGB EFR}
+    - {t: RGB SPI, s: RGB SPD}
+    - {t: RGB BRI, s: RGB BRD}
+    - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
-    - RGB BRD
-    - RGB BRI
+    - {t: '$$mdi:transfer$$', type: trans}
+    - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:transfer$$', type: trans}
