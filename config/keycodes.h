@@ -22,15 +22,15 @@
 #define IT_SQUOT MINUS // '
 #define IT_IGRV EQUAL  // ì
 // Row 2
-#define IT_EGRV LBKT  // è
-#define IT_PLUS SLASH // +
+#define IT_EGRV LBKT // è
+#define IT_PLUS RBKT // +
 // Row 3
 #define IT_OGRV SEMI        // ò
 #define IT_AGRV APOS        // à
 #define IT_UGRV NON_US_HASH // ù
 // Row 4
 #define IT_LESS NON_US_BSLH // <
-#define IT_MINUS RBKT       // -
+#define IT_MINUS SLASH      // -
 
 /* Shifted symbols
  * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐

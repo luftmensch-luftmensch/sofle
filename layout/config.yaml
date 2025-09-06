@@ -75,6 +75,12 @@ parse_config:
   zmk_remove_keycode_prefix: ["IT_"]
 
   zmk_keycode_map:
+    "QUOT": "'"
+    "IGRV": "ì"
+    "EGRV": "è"
+    "UGRV": "ù"
+    AGRV: "à"
+    "OGRV": "ò"
     LESS: "<"
     GREAT: ">"
     EACU: "è"
