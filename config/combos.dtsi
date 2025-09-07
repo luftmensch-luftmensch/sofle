@@ -44,3 +44,6 @@ ZMK_COMBO(raise, &tog RAISE, LH4 RH0)
 
 // Pressing j & k keys gives the Escape key (0)
 ZMK_COMBO(vesc, &kp ESC, RM1 RM2, BASE)
+
+// Pressing y & u keys gives the Escape key (0)
+ZMK_COMBO(vesc, &kp BACKSPACE, RT0 RT1, BASE)

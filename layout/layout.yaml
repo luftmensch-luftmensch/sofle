@@ -87,7 +87,7 @@ layers:
     - HOME
     - $$mdi:arrow-up-bold$$
     - END
-    - ''''
+    - SQUOT
     - ì
     - {t: '$$mdi:transfer$$', type: trans}
     - $$mdi:tilde$$
@@ -101,7 +101,7 @@ layers:
     - $$mdi:arrow-down-bold$$
     - $$mdi:arrow-right-bold$$
     - è
-    - ']'
+    - ^
     - {t: '$$mdi:transfer$$', type: trans}
     - RGB TOG
     - {t: RGB EFF, s: RGB EFR}
@@ -264,4 +264,7 @@ combos:
   k: {t: layer2, h: toggle}
 - p: [34, 35]
   k: $$mdi:keyboard-esc$$
+  l: [master]
+- p: [20, 21]
+  k: $$mdi:backspace$$
   l: [master]
