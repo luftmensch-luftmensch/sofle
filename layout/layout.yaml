@@ -265,6 +265,6 @@ combos:
 - p: [34, 35]
   k: $$mdi:keyboard-esc$$
   l: [master]
-- p: [20, 21]
+- p: [21, 22]
   k: $$mdi:backspace$$
   l: [master]
