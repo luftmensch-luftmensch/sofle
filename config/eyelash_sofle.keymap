@@ -58,7 +58,7 @@ ZMK_HOLD_TAP(quick_tap,
 */
 ZMK_MOD_MORPH(backdel,
     bindings = <&kp BACKSPACE>, <&kp DELETE>;
-    mods     = <(MOD_LGUI|MOD_LSFT|MOD_RGUI|MOD_RSFT)>;
+    mods     = <SG_MODS>;
 )
 
 
@@ -70,7 +70,7 @@ ZMK_MOD_MORPH(backdel,
 */
 ZMK_MOD_MORPH(at,
     bindings = <&kp IT_AT>, <&alt_at>;
-    mods     = <(MOD_LSFT|MOD_RSFT)>;
+    mods     = <S_MODS>;
 )
 
 /*
@@ -80,7 +80,7 @@ ZMK_MOD_MORPH(at,
 */
 ZMK_MOD_MORPH(tilde,
     bindings = <&kp IT_TILDE>, <&alt_tilde>;
-    mods     = <(MOD_LSFT|MOD_RSFT)>;
+    mods     = <S_MODS>;
 )
 
 /*
@@ -90,7 +90,7 @@ ZMK_MOD_MORPH(tilde,
 */
 ZMK_MOD_MORPH(hash,
     bindings = <&kp IT_HASH>, <&alt_hash>;
-    mods     = <(MOD_LSFT|MOD_RSFT)>;
+    mods     = <S_MODS>;
 )
 
 /*
@@ -100,7 +100,7 @@ ZMK_MOD_MORPH(hash,
 */
 ZMK_MOD_MORPH(bktk,
     bindings = <&kp IT_BKTK>, <&alt_bktk>;
-    mods     = <(MOD_LSFT|MOD_RSFT)>;
+    mods     = <S_MODS>;
 )
 
 /*
@@ -110,7 +110,7 @@ ZMK_MOD_MORPH(bktk,
 */
 ZMK_MOD_MORPH(plmin,
     bindings = <&kp FSLH>, <&kp RBKT>;
-    mods     = <(MOD_LALT|MOD_RALT)>;
+    mods     = <A_MODS>;
 )
 
 /*
@@ -120,7 +120,7 @@ ZMK_MOD_MORPH(plmin,
 */
 ZMK_MOD_MORPH(rgb_eff,
     bindings = <U_RGB_EFF>, <U_RGB_EFR>;
-    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+    mods     = <SA_MODS>;
 )
 
 /*
@@ -129,7 +129,7 @@ ZMK_MOD_MORPH(rgb_eff,
 */
 ZMK_MOD_MORPH(rgb_speed,
     bindings = <U_RGB_SPI>, <U_RGB_SPD>;
-    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+    mods     = <SA_MODS>;
 )
 
 /*
@@ -138,7 +138,7 @@ ZMK_MOD_MORPH(rgb_speed,
 */
 ZMK_MOD_MORPH(rgb_brig,
     bindings = <U_RGB_BRI>, <U_RGB_BRD>;
-    mods     = <(MOD_LALT|MOD_RALT|MOD_RSFT|MOD_LSFT)>;
+    mods     = <SA_MODS>;
 )
 
 // Activate ADJUST layer by pressing raise and lower

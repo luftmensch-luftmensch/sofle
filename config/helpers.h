@@ -26,6 +26,16 @@
 #define U_RGB_BRD   &rgb_ug RGB_BRD
 #define U_RGB_BRI   &rgb_ug RGB_BRI
 
+// Handy shortcut for modifier keys identifier on ZMK MOD MORPH BEHAVIOR
+#define ALL_MODS                                                                                   \
+    (MOD_LSFT | MOD_RSFT | MOD_LCTL | MOD_RCTL | MOD_LALT | MOD_RALT | MOD_LGUI | MOD_RGUI)
+
+#define S_MODS (MOD_LSFT | MOD_RSFT)
+#define A_MODS (MOD_LALT | MOD_RALT)
+#define C_MODS (MOD_LCTL | MOD_RCTL)
+#define SA_MODS (MOD_LSFT | MOD_RSFT | MOD_LALT | MOD_RALT)
+#define SG_MODS (MOD_LSFT | MOD_RSFT | MOD_LGUI | MOD_RGUI)
+
 /* ZMK_BEHAVIOR */
 
 #define ZMK_BEHAVIOR_CORE_adaptive_key      compatible = "zmk,behavior-adaptive-key";      #binding-cells         = <0>
