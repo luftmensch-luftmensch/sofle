@@ -259,7 +259,7 @@ ZMK_LAYER(layer2,
     &kp F1       &kp F2       &kp F3       &kp F4        &kp F5       &kp F6        U_MS_U     &kp F7       &kp F8       &kp F9      &kp F10      &kp F11       &kp F12
     ___          XXX          XXX          ___           ___          &out OUT_TOG  U_MS_D     ___          ___          ___         ___          &kp UNDER     &kp PLUS
     ___          &at          &hash        &tilde        &bktk        ___           U_MS_L     &kp IT_LESS  &kp IT_GREAT ___         ___          &kp IT_EACU   &kp IT_AST
-    ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT  &kp IT_RBKT  XXX         XXX          &kp RIGHT_ALT  ___
+    ___          ___          ___          ___           ___          ___           U_MS_R     &kp IT_LBKT  &kp IT_RBKT  ___         ___          ___            ___
     ___          ___          ___          ___           ___          ___           &mkp LCLK   ___           ___        ___         ___          ___
     , &scroll_encoder
 )

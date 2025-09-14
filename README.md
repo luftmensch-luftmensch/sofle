@@ -14,7 +14,8 @@ nix build .#firmware
 
 This will generate two `uf2` (`zmk_left.uf2` & `zmk_right.uf2`) that needs to be copied on the left & right side of the keyboard
 
-## Building through github action (Currently disabled)
+<details>
+<summary>Building through github action (Currently disabled)</summary>
 
 Place the content of this snippet into `.github/workflows/build.yml`
 
@@ -29,6 +30,8 @@ jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 ```
+
+</details>
 
 # ZMK Cheat Sheet
 
