@@ -156,8 +156,8 @@ ZMK_MACRO(win_off,
 
 // Custom macro to generate @ using the alt code table
 ZMK_MACRO(alt_at,
-    wait-ms = <40>;
-    tap-ms  = <40>;
+    wait-ms = <10>;
+    tap-ms  = <10>;
     bindings = <&macro_press     &kp LALT>
                , <&macro_tap     WIN_AT>
                , <&macro_release &kp LALT>;
@@ -166,8 +166,8 @@ ZMK_MACRO(alt_at,
 
 // Custom macro to generate # using the alt code table
 ZMK_MACRO(alt_hash,
-    wait-ms = <40>;
-    tap-ms  = <40>;
+    wait-ms = <10>;
+    tap-ms  = <10>;
     bindings = <&macro_press     &kp LALT>
                , <&macro_tap     WIN_HASH>
                , <&macro_release &kp LALT>;
@@ -176,8 +176,8 @@ ZMK_MACRO(alt_hash,
 // Custom macro to generate ~ using the alt code table
 // , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N6>
 ZMK_MACRO(alt_tilde,
-    wait-ms = <40>;
-    tap-ms  = <40>;
+    wait-ms = <10>;
+    tap-ms  = <10>;
     bindings = <&macro_press     &kp LALT>
                , <&macro_tap     WIN_TILDE>
                , <&macro_release &kp LALT>;
@@ -185,8 +185,8 @@ ZMK_MACRO(alt_tilde,
 
 // Custom macro to generate ` using the alt code table
 ZMK_MACRO(alt_bktk,
-    wait-ms = <40>;
-    tap-ms  = <40>;
+    wait-ms = <10>;
+    tap-ms  = <10>;
     bindings = <&macro_press     &kp LALT>
                , <&macro_tap     WIN_BKTK>
                , <&macro_release &kp LALT>;
