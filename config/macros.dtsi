@@ -1,0 +1,166 @@
+/*
+     _____        __ _          _   __           _                         _
+    /  ___|      / _| |        | | / /          | |                       | |
+    \ `--.  ___ | |_| | ___    | |/ /  ___ _   _| |__   ___   __ _ _ __ __| |
+     `--. \/ _ \|  _| |/ _ \   |    \ / _ \ | | | '_ \ / _ \ / _` | '__/ _` |
+    /\__/ / (_) | | | |  __/   | |\  \  __/ |_| | |_) | (_) | (_| | | | (_| |
+    \____/ \___/|_| |_|\___|   \_| \_/\___|\__, |_.__/ \___/ \__,_|_|  \__,_|
+                                            __/ |
+                                           |___/
+*/
+
+/*
+  Enables holding the first mod-tap key
+  by performing a tap-release-hold sequence.
+  To use it: "&qt KEYCODE1 KEYCODE2"
+*/
+ZMK_HOLD_TAP(quick_tap,
+    flavor          = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms    = <200>;
+    bindings        = <&kp>, <&kp>;
+)
+
+/*
+  Pressing the key on its own will send a Backspace keycode
+  but pressing it while a shift or GUI modifier is held sends the Delete
+  keycode instead
+*/
+ZMK_MOD_MORPH(backdel,
+    bindings = <&kp BACKSPACE>, <&kp DELETE>;
+    mods     = <SG_MODS>;
+)
+
+
+
+/*
+  Pressing the key on its own will send an @ keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(at,
+    bindings = <&kp IT_AT>, <&alt_at>;
+    mods     = <S_MODS>;
+)
+
+/*
+  Pressing the key on its own will send a ~ keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(tilde,
+    bindings = <&kp IT_TILDE>, <&alt_tilde>;
+    mods     = <S_MODS>;
+)
+
+/*
+  Pressing the key on its own will send a # keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(hash,
+    bindings = <&kp IT_HASH>, <&alt_hash>;
+    mods     = <S_MODS>;
+)
+
+/*
+  Pressing the key on its own will send a ` keycode
+  but pressing it while a shift modifier is held sends
+  the corresponding Alt Code keycode combination instead
+*/
+ZMK_MOD_MORPH(bktk,
+    bindings = <&kp IT_BKTK>, <&alt_bktk>;
+    mods     = <S_MODS>;
+)
+
+/*
+  Pressing the key on its own will send a - keycode
+  but pressing it while a shift modifier is held sends
+  the + keycode instead
+*/
+ZMK_MOD_MORPH(plmin,
+    bindings = <&kp FSLH>, <&kp RBKT>;
+    mods     = <A_MODS>;
+)
+
+/*
+  Pressing the key on its own will cycle the rgb effect
+  but pressing it while a modifier (alt/shift) is held will cycle
+  the effect in reverse mode
+*/
+ZMK_MOD_MORPH(rgb_eff,
+    bindings = <U_RGB_EFF>, <U_RGB_EFR>;
+    mods     = <SA_MODS>;
+)
+
+/*
+  Pressing the key on its own will increase the rgb effect speed
+  but pressing it while a modifier (alt/shift) is held will decrease it
+*/
+ZMK_MOD_MORPH(rgb_speed,
+    bindings = <U_RGB_SPI>, <U_RGB_SPD>;
+    mods     = <SA_MODS>;
+)
+
+/*
+  Pressing the key on its own will increase the rgb effect brightness
+  but pressing it while a modifier (alt/shift) is held will decrease it
+*/
+ZMK_MOD_MORPH(rgb_brig,
+    bindings = <U_RGB_BRI>, <U_RGB_BRD>;
+    mods     = <SA_MODS>;
+)
+
+// Turn off Windows
+ZMK_MACRO(win_off,
+    wait-ms = <40>;
+    tap-ms  = <40>;
+    bindings = <&macro_press     &kp LWIN>
+               , <&macro_tap     &kp X>
+               , <&macro_release &kp LWIN>
+               , <&macro_tap     &kp U &kp U>;
+)
+
+// Custom macro to generate @ using the alt code table
+ZMK_MACRO(alt_at,
+    wait-ms = <10>;
+    tap-ms  = <10>;
+    bindings = <&macro_press     &kp LALT>
+               , <&macro_tap     WIN_AT>
+               , <&macro_release &kp LALT>;
+)
+
+
+// Custom macro to generate # using the alt code table
+ZMK_MACRO(alt_hash,
+    wait-ms = <10>;
+    tap-ms  = <10>;
+    bindings = <&macro_press     &kp LALT>
+               , <&macro_tap     WIN_HASH>
+               , <&macro_release &kp LALT>;
+)
+
+// Custom macro to generate ~ using the alt code table
+// , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N6>
+ZMK_MACRO(alt_tilde,
+    wait-ms = <10>;
+    tap-ms  = <10>;
+    bindings = <&macro_press     &kp LALT>
+               , <&macro_tap     WIN_TILDE>
+               , <&macro_release &kp LALT>;
+)
+
+// Custom macro to generate ` using the alt code table
+ZMK_MACRO(alt_bktk,
+    wait-ms = <10>;
+    tap-ms  = <10>;
+    bindings = <&macro_press     &kp LALT>
+               , <&macro_tap     WIN_BKTK>
+               , <&macro_release &kp LALT>;
+)
+
+// Rotator encoder customization
+ZMK_ROTATOR_ENCODER(scroll_encoder,
+    bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+    tap-ms   = <100>;
+)

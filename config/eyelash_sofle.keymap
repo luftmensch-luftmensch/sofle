@@ -36,168 +36,12 @@
 #include "helpers.h"
 #include "mouse.dtsi"
 #include "combos.dtsi"
+#include "macros.dtsi"
 
 /* Global defaults */
 
-/*
-  Enables holding the first mod-tap key
-  by performing a tap-release-hold sequence.
-  To use it: "&qt KEYCODE1 KEYCODE2"
-*/
-ZMK_HOLD_TAP(quick_tap,
-    flavor          = "tap-preferred";
-    tapping-term-ms = <200>;
-    quick-tap-ms    = <200>;
-    bindings        = <&kp>, <&kp>;
-)
-
-/*
-  Pressing the key on its own will send a Backspace keycode
-  but pressing it while a shift or GUI modifier is held sends the Delete
-  keycode instead
-*/
-ZMK_MOD_MORPH(backdel,
-    bindings = <&kp BACKSPACE>, <&kp DELETE>;
-    mods     = <SG_MODS>;
-)
-
-
-
-/*
-  Pressing the key on its own will send an @ keycode
-  but pressing it while a shift modifier is held sends
-  the corresponding Alt Code keycode combination instead
-*/
-ZMK_MOD_MORPH(at,
-    bindings = <&kp IT_AT>, <&alt_at>;
-    mods     = <S_MODS>;
-)
-
-/*
-  Pressing the key on its own will send a ~ keycode
-  but pressing it while a shift modifier is held sends
-  the corresponding Alt Code keycode combination instead
-*/
-ZMK_MOD_MORPH(tilde,
-    bindings = <&kp IT_TILDE>, <&alt_tilde>;
-    mods     = <S_MODS>;
-)
-
-/*
-  Pressing the key on its own will send a # keycode
-  but pressing it while a shift modifier is held sends
-  the corresponding Alt Code keycode combination instead
-*/
-ZMK_MOD_MORPH(hash,
-    bindings = <&kp IT_HASH>, <&alt_hash>;
-    mods     = <S_MODS>;
-)
-
-/*
-  Pressing the key on its own will send a ` keycode
-  but pressing it while a shift modifier is held sends
-  the corresponding Alt Code keycode combination instead
-*/
-ZMK_MOD_MORPH(bktk,
-    bindings = <&kp IT_BKTK>, <&alt_bktk>;
-    mods     = <S_MODS>;
-)
-
-/*
-  Pressing the key on its own will send a - keycode
-  but pressing it while a shift modifier is held sends
-  the + keycode instead
-*/
-ZMK_MOD_MORPH(plmin,
-    bindings = <&kp FSLH>, <&kp RBKT>;
-    mods     = <A_MODS>;
-)
-
-/*
-  Pressing the key on its own will cycle the rgb effect
-  but pressing it while a modifier (alt/shift) is held will cycle
-  the effect in reverse mode
-*/
-ZMK_MOD_MORPH(rgb_eff,
-    bindings = <U_RGB_EFF>, <U_RGB_EFR>;
-    mods     = <SA_MODS>;
-)
-
-/*
-  Pressing the key on its own will increase the rgb effect speed
-  but pressing it while a modifier (alt/shift) is held will decrease it
-*/
-ZMK_MOD_MORPH(rgb_speed,
-    bindings = <U_RGB_SPI>, <U_RGB_SPD>;
-    mods     = <SA_MODS>;
-)
-
-/*
-  Pressing the key on its own will increase the rgb effect brightness
-  but pressing it while a modifier (alt/shift) is held will decrease it
-*/
-ZMK_MOD_MORPH(rgb_brig,
-    bindings = <U_RGB_BRI>, <U_RGB_BRD>;
-    mods     = <SA_MODS>;
-)
-
 // Activate ADJUST layer by pressing raise and lower
 ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
-
-// Turn off Windows
-ZMK_MACRO(win_off,
-    wait-ms = <40>;
-    tap-ms  = <40>;
-    bindings = <&macro_press     &kp LWIN>
-               , <&macro_tap     &kp X>
-               , <&macro_release &kp LWIN>
-               , <&macro_tap     &kp U &kp U>;
-)
-
-// Custom macro to generate @ using the alt code table
-ZMK_MACRO(alt_at,
-    wait-ms = <10>;
-    tap-ms  = <10>;
-    bindings = <&macro_press     &kp LALT>
-               , <&macro_tap     WIN_AT>
-               , <&macro_release &kp LALT>;
-)
-
-
-// Custom macro to generate # using the alt code table
-ZMK_MACRO(alt_hash,
-    wait-ms = <10>;
-    tap-ms  = <10>;
-    bindings = <&macro_press     &kp LALT>
-               , <&macro_tap     WIN_HASH>
-               , <&macro_release &kp LALT>;
-)
-
-// Custom macro to generate ~ using the alt code table
-// , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N6>
-ZMK_MACRO(alt_tilde,
-    wait-ms = <10>;
-    tap-ms  = <10>;
-    bindings = <&macro_press     &kp LALT>
-               , <&macro_tap     WIN_TILDE>
-               , <&macro_release &kp LALT>;
-)
-
-// Custom macro to generate ` using the alt code table
-ZMK_MACRO(alt_bktk,
-    wait-ms = <10>;
-    tap-ms  = <10>;
-    bindings = <&macro_press     &kp LALT>
-               , <&macro_tap     WIN_BKTK>
-               , <&macro_release &kp LALT>;
-)
-
-// Rotator encoder customization
-ZMK_ROTATOR_ENCODER(scroll_encoder,
-    bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-    tap-ms   = <100>;
-)
-
 
 // ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
 // │ ESC     │  1      │ 2       │ 3       │ 4       │ 5       │                                 │ 6       │ 7       │ 8       │ 9       │ 0       │BACKSPACE│
@@ -270,9 +114,9 @@ ZMK_LAYER(layer2,
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │         │ NONE    │ NONE    │         │         │ OUT_TOG │                                 │         │  7      │  8      │  9      │  _      │ +       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ @       │ #       │ ~       │ `       │         │                                 │         │  4      │  5      │  6      │  [      │ ]       │
+// │NUM LOCK │ @       │ #       │ ~       │ `       │         │                                 │         │  4      │  5      │  6      │  [      │ ]       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────╮             ╭─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-// │         │ RGB_TOG │   RGB   │   RGB   │   RGB   │         │  MUTE   │             │↑↓  ←  → │         │  1      │  2      │  3      │         │         │
+// │         │ RGB_TOG │   RGB   │   RGB   │   RGB   │         │  MUTE   │             │↑↓  ←  → │  0      │  1      │  2      │  3      │  .      │         │
 // │         │         │  EFFECT │  SPEED  │  BRIGHT │         │         │             │ M_LCLK  │         │         │         │         │         │         │
 // ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯             ╰─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────╯
 //           │         │         │         │         │         │                                 │         │         │         │         │         │
@@ -280,8 +124,8 @@ ZMK_LAYER(layer2,
 ZMK_LAYER(adjust,
     &kp F1       &kp F2       &kp F3       &kp F4        &kp F5      &kp F6        U_MS_U     &kp F7       &kp F8      &kp F9      &kp F10     &kp F11      &kp F12
     ___          XXX          XXX          ___           ___         &out OUT_TOG  U_MS_D     ___          &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp UNDER    &kp PLUS
-    ___          &at          &hash        &tilde        &bktk        ___          U_MS_L     ___          &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp IT_EACU  &kp IT_AST
-    ___          U_RGB_TOG    &rgb_eff     &rgb_speed    &rgb_brig    ___          U_MS_R     ___          &kp KP_N1   &kp KP_N2   &kp KP_N3   ___          ___
+    &kp KP_NUM   &at          &hash        &tilde        &bktk        ___          U_MS_L     ___          &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp IT_EACU  &kp IT_AST
+    ___          U_RGB_TOG    &rgb_eff     &rgb_speed    &rgb_brig    ___          U_MS_R     &kp KP_N0    &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp DOT      ___
     ___          ___          ___          ___           ___          ___          &mkp LCLK  ___          ___         ___         ___         ___
     , &scroll_encoder
 )
