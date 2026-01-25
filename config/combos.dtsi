@@ -36,3 +36,6 @@ ZMK_COMBO(vesc, &kp ESC, RM1 RM2, BASE)
 
 // Pressing u & i keys gives the Escape key (0)
 ZMK_COMBO(bksp, &kp BACKSPACE, RT1 RT2, BASE, COMBO_TERM_SLOW)
+
+// Pressing m & , keys gives the Del key (0)
+ZMK_COMBO(mdel, &kp DEL, RB1 RB2, BASE)

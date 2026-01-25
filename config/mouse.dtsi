@@ -29,11 +29,11 @@
 // Mouse scroll
 &msc_input_listener {
   warp {
-    layers = <ADJUST>;
+    layers = <LOWER RAISE>;
     input-processors = <&zip_scroll_scaler 2 1>;
   };
   precision {
-    layers = <BASE LOWER RAISE>;
+    layers = <BASE ADJUST>;
     input-processors = <&zip_scroll_scaler 1 2>;
   };
 };

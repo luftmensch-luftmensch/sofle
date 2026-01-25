@@ -214,12 +214,12 @@ layers:
     - {t: '$$mdi:toggle-switch$$', h: '$$mdi:bluetooth$$', s: '$$mdi:usb$$'}
     - {t: '$$mdi:menu-down$$', s: '$$mdi:mouse$$'}
     - {t: '$$mdi:transfer$$', type: trans}
-    - '7'
-    - '8'
-    - '9'
+    - KP 7
+    - KP 8
+    - KP 9
     - '?'
     - ^
-    - {t: '$$mdi:transfer$$', type: trans}
+    - KP NUM
     - $$mdi:at$$
     - $$mdi:pound$$
     - $$mdi:tilde$$
@@ -227,9 +227,9 @@ layers:
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:menu-left$$', s: '$$mdi:mouse$$'}
     - {t: '$$mdi:transfer$$', type: trans}
-    - '4'
-    - '5'
-    - '6'
+    - KP 4
+    - KP 5
+    - KP 6
     - è
     - '*'
     - {t: '$$mdi:transfer$$', type: trans}
@@ -239,11 +239,11 @@ layers:
     - {t: RGB BRI, s: RGB BRD}
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:menu-right$$', s: '$$mdi:mouse$$'}
-    - {t: '$$mdi:transfer$$', type: trans}
-    - '1'
-    - '2'
-    - '3'
-    - {t: '$$mdi:transfer$$', type: trans}
+    - KP 0
+    - KP 1
+    - KP 2
+    - KP 3
+    - .
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:transfer$$', type: trans}
     - {t: '$$mdi:transfer$$', type: trans}
@@ -261,10 +261,13 @@ combos:
 - p: [39, 51]
   k: {t: layer1, h: toggle}
 - p: [57, 59]
-  k: {t: layer2, h: toggle}
+  k: {t: adjust, h: toggle}
 - p: [34, 35]
   k: $$mdi:keyboard-esc$$
   l: [master]
 - p: [21, 22]
   k: $$mdi:backspace$$
+  l: [master]
+- p: [47, 48]
+  k: DEL
   l: [master]
