@@ -44,7 +44,7 @@
 ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
 
 // ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                                 ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
-// │ ESC     │  1      │ 2       │ 3       │ 4       │ 5       │                                 │ 6       │ 7       │ 8       │ 9       │ 0       │BACKSPACE│
+// │ ESC | \ │  1      │ 2       │ 3       │ 4       │ 5       │                                 │ 6       │ 7       │ 8       │ 9       │ 0       │BACKSPACE│
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 // │ TAB     │  Q      │ W       │ E       │ R       │ T       │                                 │ Y       │ U       │ I       │ O       │ P       │ ù       │
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤                                 ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -55,9 +55,8 @@ ZMK_CONDITIONAL_LAYER(adjust, LOWER RAISE, ADJUST)
 //           │  LCTRL  │ LGUI    │ LALT    │ MO(1)   │ SPACE   │                                 │ SPACE   │ ENTER   │ MO(2)   │ RALT    │ DELETE  │
 //           ╰─────────┴─────────┴─────────┴─────────┴─────────╯                                 ╰─────────┴─────────┴─────────┴─────────┴─────────╯
 
-// NB: I didn't declared a behavior for the gresc keybinding as it is already defined at https://github.com/zmkfirmware/zmk/blob/main/app/dts/behaviors/gresc.dtsi
 ZMK_LAYER(master,
-    &gresc     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP      &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
+    &escgr     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5        &kp UP      &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BACKSPACE
     &kp TAB    &kp Q         &kp W         &kp E         &kp R         &kp T         &kp DOWN    &kp Y         &kp U         &kp I         &kp O         &kp P         &kp IT_UGRV
     &kp CAPS   &kp A         &kp S         &kp D         &kp F         &kp G         &kp LEFT    &kp H         &kp J         &kp K         &kp L         &kp IT_OGRV   &kp IT_AGRV
     &kp LSHFT  &kp Z         &kp X         &kp C         &kp V         &kp B         &kp RIGHT   &kp N         &kp M         &kp COMMA     &kp DOT       &plmin        &kp RSHIFT

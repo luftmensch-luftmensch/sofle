@@ -32,6 +32,17 @@ ZMK_MOD_MORPH(backdel,
 )
 
 
+/*
+  Pressing the key on its own will send a Escape keycode
+  but pressing it while a shift or GUI modifier is held sends the \
+  keycode instead
+  NB: I know that gresc is already defined at https://github.com/zmkfirmware/zmk/blob/main/app/dts/behaviors/gresc.dtsi
+      but i don't really like the behavior enabled on those modifiers
+*/
+ZMK_MOD_MORPH(escgr,
+    bindings = <&kp ESC>, <&kp GRAVE>;
+    mods     = <S_MODS>;
+)
 
 /*
   Pressing the key on its own will send an @ keycode
