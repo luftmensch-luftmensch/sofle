@@ -39,3 +39,6 @@ ZMK_COMBO(bksp, &kp BACKSPACE, RT1 RT2, BASE, COMBO_TERM_SLOW)
 
 // Pressing m & , keys gives the Del key (0)
 ZMK_COMBO(mdel, &kp DEL, RB1 RB2, BASE)
+
+// Pressing d & f keys gives the Tab key (0)
+ZMK_COMBO(dftab, &kp TAB, LM3 LM4, BASE)
