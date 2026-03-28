@@ -58,7 +58,7 @@ layers:
     - $$mdi:apple-keyboard-command$$
     - $$mdi:apple-keyboard-option$$
     - layer1
-    - $$mdi:keyboard-tab$$
+    - $$mdi:keyboard-space$$
     - $$mdi:keyboard-return$$
     - $$mdi:keyboard-space$$
   - ['$$mdi:keyboard-return$$', layer2, '$$mdi:apple-keyboard-option$$', '$$mdi:backspace-reverse-outline$$']
@@ -272,5 +272,8 @@ combos:
   k: DEL
   l: [master]
 - p: [29, 30]
+  k: $$mdi:keyboard-tab$$
+  l: [master]
+- p: [16, 17]
   k: $$mdi:keyboard-tab$$
   l: [master]

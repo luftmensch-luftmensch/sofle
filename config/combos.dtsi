@@ -42,3 +42,6 @@ ZMK_COMBO(mdel, &kp DEL, RB1 RB2, BASE)
 
 // Pressing d & f keys gives the Tab key (0)
 ZMK_COMBO(dftab, &kp TAB, LM3 LM4, BASE)
+
+// Pressing e & r keys gives the Tab key (0)
+ZMK_COMBO(ertab, &kp TAB, LT3 LT4, BASE)
