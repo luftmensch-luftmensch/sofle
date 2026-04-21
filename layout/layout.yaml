@@ -217,7 +217,7 @@ layers:
     - KP 7
     - KP 8
     - KP 9
-    - '?'
+    - KP SLASH
     - ^
     - KP NUM
     - $$mdi:at$$
@@ -230,7 +230,7 @@ layers:
     - KP 4
     - KP 5
     - KP 6
-    - è
+    - KP MINUS
     - '*'
     - {t: '$$mdi:transfer$$', type: trans}
     - RGB TOG
