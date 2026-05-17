@@ -55,6 +55,27 @@ ZMK_MOD_MORPH(at,
 )
 
 /*
+  Pressing the key on its own will send the Italian ( keycode
+  but pressing it while a shift modifier is held sends the English corresponding ( keycode
+  keycode instead
+*/
+ZMK_MOD_MORPH(lpar,
+    bindings = <&kp IT_LPAR>, <&kp LPAR>;
+    mods     = <S_MODS>;
+)
+
+/*
+  Pressing the key on its own will send the Italian ) keycode
+  but pressing it while a shift modifier is held sends the English corresponding ) keycode
+  keycode instead
+*/
+ZMK_MOD_MORPH(rpar,
+    bindings = <&kp IT_RPAR>, <&kp RPAR>;
+    mods     = <S_MODS>;
+)
+
+
+/*
   Pressing the key on its own will send a ~ keycode
   but pressing it while a shift modifier is held sends
   the corresponding Alt Code keycode combination instead
